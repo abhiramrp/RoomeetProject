@@ -1,5 +1,5 @@
 body {
-    background: #00b5d4;
+    background:  linear-gradient(45deg, #19dfc5, #f84646) fixed;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -12,11 +12,26 @@ body {
 }
 #intro {
     margin-top: 18%;
-    background: #008ea7;
+    background: #0bdfdf;
     margin-right: 70%;
     text-align: center;
 }
 
 .list {
     margin-left: 60%;
+}
+
+.SignInForm {
+    margin-top: 15%;
+}
+.NoDecor {
+    text-decoration: none !important;
+    
+}
+
+.submiddle {
+    position: fixed;
+    top: 20%;
+    left: 43%;
+    font-size: 100%;
 }
