@@ -1,0 +1,12 @@
+body {
+    background: #00b5d4;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.middle {
+    position: fixed;
+    top: 10%;
+    left: 40%;
+
+    font-size: 500%;
+}
