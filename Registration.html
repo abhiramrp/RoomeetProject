@@ -9,17 +9,40 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h1><a href="Home.html" class = "NoDecor text-dark">Roomeet</a></h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="Home.html">Roomeet</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+              <a class="nav-link" href="Registration.html">Sign Up</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="SignIn.html">Sign In</a>
+            </li>
+            
+           
+          </ul>
+        
+        </div>
+      </nav>
+
     
     <h1 class = "middle">Sign Up</h1>
-    <h2 class = "submiddle">Already a member?<a href="SignIn.html">Sign in</a></h2>
-
+    <div>
+        <h2 class = "submiddle">Already a member?<a href="SignIn.html">Sign in</a></h2>
+    </div>
     <div class = "SignInForm">
         <form class = "col-6 mx-auto ">
             <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-dark">We'll never share your email with anyone else.</small>
+            <label for="examplePhone1">Phone Number</label>
+            <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10}">
+            <small id="phoneHelp" class="form-text text-dark">We'll never share your phone number with anyone else.</small>
             </div>
             <div class="form-group">
             <label for="exampleInputPassword1">Password</label>

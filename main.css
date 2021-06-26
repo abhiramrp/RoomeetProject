@@ -4,9 +4,10 @@ body {
 }
 
 .middle {
-    position: fixed;
-    top: 10%;
-    left: 40%;
+
+    margin-top: 00%;
+    margin-bottom: 00%;
+    text-align: center;
 
     font-size: 500%;
 }
@@ -22,7 +23,8 @@ body {
 }
 
 .SignInForm {
-    margin-top: 15%;
+   
+    border-top: 10%;
 }
 .NoDecor {
     text-decoration: none !important;
@@ -30,8 +32,6 @@ body {
 }
 
 .submiddle {
-    position: fixed;
-    top: 20%;
-    left: 43%;
+    text-align: center;
     font-size: 100%;
 }
