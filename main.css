@@ -10,3 +10,13 @@ body {
 
     font-size: 500%;
 }
+#intro {
+    margin-top: 18%;
+    background: #008ea7;
+    margin-right: 70%;
+    text-align: center;
+}
+
+.list {
+    margin-left: 60%;
+}
