@@ -20,8 +20,11 @@ body {
 
 .list {
     margin-left: 60%;
+<<<<<<< HEAD
     font-size: 150%;
     background: #dfe0f3;
+=======
+>>>>>>> parent of 2edf346 (Register.js needs work still)
 }
 
 .sign-inForm {
