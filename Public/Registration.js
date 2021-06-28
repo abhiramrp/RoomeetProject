@@ -1,6 +1,4 @@
 
-
-
 function register(phone, pass, pass2)
 {
     if(pass != pass2)
