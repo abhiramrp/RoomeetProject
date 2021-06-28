@@ -15,15 +15,16 @@ body {
     margin-top: 7%;
     background: #0bdfdf;
     margin-right: 70%;
-    text-align: center;
+    padding: 10px;
 }
 
 .list {
     margin-left: 60%;
     font-size: 150%;
+    background: #dfe0f3;
 }
 
-.SignInForm {
+.sign-inForm {
    
     border-top: 10%;
 }
