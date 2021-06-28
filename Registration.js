@@ -12,3 +12,4 @@ function register(phone, pass, pass2)
         alert(phone +"\n"+pass+"\n"+pass2);
     }
 } 
+
