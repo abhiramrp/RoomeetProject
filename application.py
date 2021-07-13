@@ -1,6 +1,4 @@
 import os
-import sqlite3
-
 from flask import Flask, render_template, request, session, redirect
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -17,10 +15,8 @@ def register():
     session.clear()
 
     if request.method == "POST":
-        request.form.
+        request.form
         username = request.form.get("username")
         email = request.form.get("email")
         password = request.form.get("password")
         rpassword = request.form.get("rpassword")
-
-
