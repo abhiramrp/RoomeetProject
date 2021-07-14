@@ -1,6 +1,4 @@
 import os
-import sqlite3
-
 from flask import Flask, render_template, request, session, redirect
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -11,10 +9,14 @@ app.secret_key = 'super secret key'
 
 @app.route("/")
 def index():
-    return render_template("Home.html")
+<<<<<<< HEAD
+    return render_template("home.html")
+=======
+    return render_template("profile.html")
+>>>>>>> b3a0a32cfe171b7764d9fb4c5571f46dbe11fc62
 
 
-@app.route("/Registration", methods=["GET","POST"])
+@app.route("/registration", methods=["GET","POST"])
 def Registration():
     session.clear()
     
@@ -24,6 +26,10 @@ def Registration():
         username = request.form.get("username")
         email = request.form.get("email")
         password = request.form.get("password")
+<<<<<<< HEAD
         rpassword = request.form.get("rpassword")
 
-    return render_template("Registration.html")
+    return render_template("registration.html")
+=======
+        rpassword = request.form.get("rpassword")
+>>>>>>> b3a0a32cfe171b7764d9fb4c5571f46dbe11fc62
