@@ -7,15 +7,12 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 
+app.secret_key = 'super secret key'
+
 @app.route("/")
 def index():
     return render_template("Home.html")
 
-if __name__ == "__main__":
-    app.secret_key = 'super secret key'
-
-    app.debug = True
-    app.run()
 
 @app.route("/Registration", methods=["GET","POST"])
 def Registration():
