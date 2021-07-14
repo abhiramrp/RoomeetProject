@@ -11,10 +11,16 @@ app = Flask(__name__)
 def index():
     return render_template("Home.html")
 
+if __name__ == "__main__":
+    app.secret_key = 'super secret key'
+
+    app.debug = True
+    app.run()
 
 @app.route("/Registration", methods=["GET","POST"])
 def Registration():
     session.clear()
+    
 
     if request.method == "POST":
         request.form
