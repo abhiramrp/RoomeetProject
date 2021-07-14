@@ -7,6 +7,11 @@ $ export FLASK_ENV=development
 
 Do this later to run the app
 ```
+$ flask init-db
+```
+
+If made changes to database schema.sql, please do
+```
 $ flask run
 ```
 
@@ -14,4 +19,5 @@ Flask resource: (https://flask.palletsprojects.com/en/2.0.x/tutorial/)
 
 
 Auth files are for user accounts
+
 blog files are for user activities

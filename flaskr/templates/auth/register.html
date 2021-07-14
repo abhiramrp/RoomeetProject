@@ -8,8 +8,14 @@
   <form method="post">
     <label for="username">Username</label>
     <input name="username" id="username" required>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required>
+    <label for="phone">Phone</label>
+    <input type="tel" name="phone" id="phone" required>
     <label for="password">Password</label>
     <input type="password" name="password" id="password" required>
+    <label for="cpassword">Confirm Password</label>
+    <input type="password" name="cpassword" id="cpassword" required>
     <input type="submit" value="Register">
   </form>
 {% endblock %}
