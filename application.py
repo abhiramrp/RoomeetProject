@@ -26,3 +26,7 @@ def Registration():
 
     return render_template("registration.html")
 
+@app.route("/sign-in")
+def sign_in():
+    session.clear()
+    return render_template("sign-in.html")
