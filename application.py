@@ -12,8 +12,8 @@ def index():
     return render_template("Home.html")
 
 
-@app.route("/register", methods=["GET","POST"])
-def register():
+@app.route("/Registration", methods=["GET","POST"])
+def Registration():
     session.clear()
 
     if request.method == "POST":
@@ -23,4 +23,4 @@ def register():
         password = request.form.get("password")
         rpassword = request.form.get("rpassword")
 
-
+    return render_template("Registration.html")
