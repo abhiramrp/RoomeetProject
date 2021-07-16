@@ -17,7 +17,8 @@ $ flask init-db
 
 Flask resource: (https://flask.palletsprojects.com/en/2.0.x/tutorial/)
 
-Fix [base.html](base.html) and 
+
+Make changes to [base.html](flaskr/templates/base.html) and [main.css](flaskr/static/main.css) instead of making basic design and layout changes to everypage. 
 
 
 Auth files are for user accounts
