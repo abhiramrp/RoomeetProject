@@ -17,7 +17,7 @@ $ flask init-db
 
 Flask resource: (https://flask.palletsprojects.com/en/2.0.x/tutorial/)
 
-Fix [badse.html](base.html) and 
+Fix [base.html](setup.py) and 
 
 
 Auth files are for user accounts
