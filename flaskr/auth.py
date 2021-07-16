@@ -46,7 +46,16 @@ def register():
                 (username, email, phone, generate_password_hash(password))
             )
             db.commit()
-            return redirect(url_for('auth.login'))
+
+            user = db.execute(
+                'SELECT * FROM user WHERE username = ?', (username,)
+            ).fetchone()
+
+            session.clear()
+            session['user_id'] = user['id']
+            return redirect(url_for('blog.index'))
+
+            # return redirect(url_for('auth.login'))
 
         flash(error)
 
@@ -73,7 +82,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('index'))
+            return redirect(url_for('blog.index'))
 
         flash(error)
 
@@ -93,7 +102,7 @@ def load_logged_in_user():
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('blog.index'))
 
 def login_required(view):
     @functools.wraps(view)

@@ -1,0 +1,39 @@
+body {
+    background:  linear-gradient(45deg, #19dfc5, #f84646) fixed;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.middle {
+
+    margin-top: 00%;
+    margin-bottom: 00%;
+    text-align: center;
+
+    font-size: 500%;
+}
+#intro {
+    margin-top: 7%;
+    background: #0bdfdf;
+    margin-right: 70%;
+    padding: 10px;
+}
+
+.list {
+    margin-left: 60%;
+    font-size: 150%;
+    background: #dfe0f3;
+}
+
+.sign-inForm {
+   
+    border-top: 10%;
+}
+.NoDecor {
+    text-decoration: none !important;
+    
+}
+
+.submiddle {
+    text-align: center;
+    font-size: 100%;
+}

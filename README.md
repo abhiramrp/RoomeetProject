@@ -7,15 +7,17 @@ $ export FLASK_ENV=development
 
 Do this later to run the app
 ```
-$ flask init-db
+$ flask run
 ```
 
 If made changes to database schema.sql, please do
 ```
-$ flask run
+$ flask init-db
 ```
 
 Flask resource: (https://flask.palletsprojects.com/en/2.0.x/tutorial/)
+
+Fix [base.html](base.html) and 
 
 
 Auth files are for user accounts
