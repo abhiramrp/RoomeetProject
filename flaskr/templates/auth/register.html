@@ -1,21 +1,46 @@
 {% extends 'base.html' %}
 
 {% block header %}
+<<<<<<< HEAD
   <h1 >{% block title %}Register{% endblock %}</h1>
+  <link rel="stylesheet" href="{{ url_for('static', filename='registration.css') }}">
+=======
+  <h1 class = "middle">{% block title %}Register{% endblock %}</h1>
+  <h2 class = "submiddle">Already a member?<a href="{{ url_for('auth.login') }}">Sign in</a></h2>
+>>>>>>> parent of 4922389 (toook back some changes)
 {% endblock %}
 
 {% block content %}
-  <form method="post" class = "col-6 mx-auto">
-    <label for="username">Username</label>
-    <input name="username" id="username" required>
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required>
-    <label for="phone">Phone</label>
-    <input type="tel" name="phone" id="phone" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <label for="cpassword">Confirm Password</label>
-    <input type="password" name="cpassword" id="cpassword" required>
-    <input type="submit" value="Register">
-  </form>
+
+  <div class = "container">
+    <div class="title">Registration</div>
+    <form action = "#">
+        <div class="user-details">
+            <div class="input-box">
+              <label for="username" class = "details">Username</label>
+              <input name="username" id="username" required>
+            </div>
+
+            <div class="input-box">
+              <label for="email" class = "details">Email</label>
+              <input type="email" name="email" id="email" required>
+            </div>
+            <div class="input-box">
+              <label for="phone" class = "details">Phone</label>
+              <input type="tel" name="phone" id="phone" required>
+            <div class="input-box">
+              <label for="password" class = "details">Password</label>
+              <input type="password" name="password" id="password" required>
+            </div>
+            <div class="input-box">
+              <label for="cpassword" class = "details">Confirm Password</label>
+              <input type="password" name="cpassword" id="cpassword" required>
+            </div>
+        </div>
+
+        <div class="button">
+            <input type="submit" value="Register">
+        </div>
+    </form>
+</div>
 {% endblock %}
