@@ -7,32 +7,33 @@
 {% endblock %}
 
 {% block content %}
-  <div class = "container">
+
+<div class = "container">
     <div class="title">Registration</div>
     <form action = "#">
         <div class="user-details">
             <div class="input-box">
-                <span class="details">Username</span>
-                <input type="text" placeholder = "Enter Your Username" id="username" required>
+                <label for="username">Username</label>
+                <input name="username" id="username" required>
             </div>
             <div class="input-box">
-                <span class="details">Email</span>
-                <input type="text" placeholder = "Enter Your Email" id="email" required>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
             </div>
             <div class="input-box">
-                <span class="details">Phone Number</span>
-                <input type="text" placeholder = "Enter Your Phone Number"  id="phone"required>
+                <label for="phone">Phone</label>
+                <input type="tel" name="phone" id="phone" required>
             </div>
             <div class="input-box">
-                <span class="details">Password</span>
-                <input type="text" placeholder = "Enter Your Phone Password"  id="password" required>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
             </div>
             <div class="input-box">
-                <span class="details">Confirm Password</span>
-                <input type="text" placeholder = "Confirm Password" id="cpassword" required>
+                <label for="cpassword">Confirm Password</label>
+                <input type="password" name="cpassword" id="cpassword" required>
             </div>
         </div>
-        <div class="gender-details">
+        <!-- <div class="gender-details">
             <input type="radio" name="gender" id="dot-1">
             <input type="radio" name="gender" id="dot-2">
             <input type="radio" name="gender" id="dot-3">
@@ -51,7 +52,7 @@
                     <span class="gender">Other</span>
                 </label>
             </div>
-        </div>
+        </div> -->
         <div class="button">
             <input type="submit" value="Register">
         </div>
