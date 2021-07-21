@@ -13,7 +13,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       {% if g.user %}
-      <li><span class="navbar-brand mb-0 h1">{{ g.user['username'] }}</span>
+      <li><span id = "account_name">{{ g.user['username'] }}</span>
       <li class = "nav-item"><a class = "nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
         
       {% else %}

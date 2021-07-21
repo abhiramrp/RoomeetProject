@@ -37,3 +37,8 @@ body {
     text-align: center;
     font-size: 100%;
 }
+
+#account_name {
+    font-size: 150%;
+    color:black
+}
