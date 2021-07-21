@@ -7,55 +7,56 @@
 {% endblock %}
 
 {% block content %}
-
-<div class = "container">
-    <div class="title">Registration</div>
-    <form action = "#">
-        <div class="user-details">
-            <div class="input-box">
-                <label for="username">Username</label>
-                <input name="username" id="username" required>
+<form method="post">
+    <div class = "container">
+        <div class="title">Registration</div>
+        <form action = "#">
+            <div class="user-details">
+                <div class="input-box">
+                    <label for="username">Username</label>
+                    <input name="username" id="username" required>
+                </div>
+                <div class="input-box">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="input-box">
+                    <label for="phone">Phone</label>
+                    <input type="tel" name="phone" id="phone" required>
+                </div>
+                <div class="input-box">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div class="input-box">
+                    <label for="cpassword">Confirm Password</label>
+                    <input type="password" name="cpassword" id="cpassword" required>
+                </div>
             </div>
-            <div class="input-box">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" required>
+            <!-- <div class="gender-details">
+                <input type="radio" name="gender" id="dot-1">
+                <input type="radio" name="gender" id="dot-2">
+                <input type="radio" name="gender" id="dot-3">
+                <span class = "gender-tittle">Gender</span>
+                <div class="category">
+                    <label for="dot-1">
+                        <span class="dot one"></span>
+                        <span class="gender">Male</span>
+                    </label>
+                    <label for="dot-2">
+                        <span class="dot two"></span>
+                        <span class="gender">Female</span>
+                    </label>
+                    <label for="dot-3">
+                        <span class="dot three"></span>
+                        <span class="gender">Other</span>
+                    </label>
+                </div>
+            </div> -->
+            <div class="button">
+                <input type="submit" value="Register">
             </div>
-            <div class="input-box">
-                <label for="phone">Phone</label>
-                <input type="tel" name="phone" id="phone" required>
-            </div>
-            <div class="input-box">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" required>
-            </div>
-            <div class="input-box">
-                <label for="cpassword">Confirm Password</label>
-                <input type="password" name="cpassword" id="cpassword" required>
-            </div>
-        </div>
-        <!-- <div class="gender-details">
-            <input type="radio" name="gender" id="dot-1">
-            <input type="radio" name="gender" id="dot-2">
-            <input type="radio" name="gender" id="dot-3">
-            <span class = "gender-tittle">Gender</span>
-            <div class="category">
-                <label for="dot-1">
-                    <span class="dot one"></span>
-                    <span class="gender">Male</span>
-                </label>
-                <label for="dot-2">
-                    <span class="dot two"></span>
-                    <span class="gender">Female</span>
-                </label>
-                <label for="dot-3">
-                    <span class="dot three"></span>
-                    <span class="gender">Other</span>
-                </label>
-            </div>
-        </div> -->
-        <div class="button">
-            <input type="submit" value="Register">
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
+</form>
 {% endblock %}
