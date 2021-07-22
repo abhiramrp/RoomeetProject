@@ -38,6 +38,10 @@ def register():
             'SELECT id FROM user WHERE email = ?', (email,)
         ).fetchone() is not None:
             error = f"Email {email} is already registered."
+        elif db.execute(
+            'SELECT id FROM user WHERE phone = ?', (phone,)
+        ).fetchone() is not None:
+            error = f"Phone number {phone} is already registered."
 
 
         if error is None:
@@ -104,6 +108,66 @@ def logout():
     session.clear()
     return redirect(url_for('blog.index'))
 
+@bp.route('/changeaccount', methods=('GET', 'POST'))
+def changeaccount():
+    user_id = session.get('user_id')
+
+    db = get_db()
+
+    error = None
+
+    user = db.execute(
+            'SELECT * FROM user WHERE id = ?', (user_id,)
+    ).fetchone()
+
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        phone = request.form['phone']
+        password = request.form['password']
+
+        if not username:
+            error = 'Username is required.'
+        elif not password:
+            error = 'Password is required.'
+        elif not email:
+            error = 'Email is required.'
+        elif not phone:
+            error = 'Phone is required.'
+
+        if db.execute(
+            'SELECT id FROM user WHERE username = ?', (username,)
+        ).fetchone() is not None:
+            if user['username'] != username:
+                error = f"User {username} is already registered." 
+        elif db.execute(
+            'SELECT id FROM user WHERE email = ?', (email,)
+        ).fetchone() is not None:
+            if user['email'] != email:
+                error = f"Email {email} is already registered."
+        elif db.execute(
+            'SELECT id FROM user WHERE phone = ?', (phone,)
+        ).fetchone() is not None:
+            if user['phone'] != phone:
+                error = f"Phone number {phone} is already registered."
+        
+        if not check_password_hash(user['password'], password):
+            error = 'Incorrect password.'
+
+        if error is None:
+            db.execute(
+                'UPDATE user SET username = ?, email = ?, phone = ?, password = ?'
+                'WHERE id = ?',
+                (username, email, phone, generate_password_hash(password), user_id)
+            )
+            db.commit()
+            return redirect(url_for('blog.index'))
+
+        flash(error)
+
+    return render_template('auth/changeaccount.html')
+
+
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
@@ -113,3 +177,6 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
+
+
