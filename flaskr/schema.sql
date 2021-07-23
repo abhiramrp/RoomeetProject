@@ -1,11 +1,12 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS profile;
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE NOT NULL,
   email TEXT UNIQUE NOT NULL, 
-  phone TEXT, 
+  phone TEXT UNIQUE NOT NULL, 
   password TEXT NOT NULL
 );
 
@@ -18,3 +19,8 @@ CREATE TABLE post (
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
 
+CREATE TABLE profile (
+  first_name TEXT NOT NULL,
+  middle_name TEXT, 
+  last_name TEXT NOT NULL
+);

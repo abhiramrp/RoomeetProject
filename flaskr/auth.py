@@ -103,13 +103,9 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
 
-@bp.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('blog.index'))
 
 @bp.route('/changeaccount', methods=('GET', 'POST'))
-def changeaccount():
+def change_account():
     user_id = session.get('user_id')
 
     db = get_db()
@@ -178,5 +174,42 @@ def login_required(view):
 
     return wrapped_view
 
+
+@bp.route('/deleteaccount', methods=('GET', 'POST'))
+def delete_account():
+    user_id = session.get('user_id')
+
+    db = get_db()
+
+    error = None
+
+    user = db.execute(
+            'SELECT * FROM user WHERE id = ?', (user_id,)
+    ).fetchone()
+
+    if request.method == 'POST':
+        password = request.form['password']
+        cpassword = request.form['cpassword']
+
+        if password != cpassword:
+            error = 'Passwords not matching'
+    
+        if not check_password_hash(user['password'], password):
+            error = 'Incorrect password.'
+
+        if error is None:
+            db.execute('DELETE FROM user WHERE id = ?', (user_id)) 
+            session.clear()
+            return redirect(url_for('blog.index'))
+
+        flash(error)
+    
+    return render_template('auth/deleteaccount.html')
+
+
+@bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('blog.index'))
 
 
