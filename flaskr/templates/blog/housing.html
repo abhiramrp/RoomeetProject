@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <title>Profile</title>
+{% endblock %}
+
+{% block content %}
+Option 3
+HTML
+<div class="row col-5">
+  <h4 class="fw-bold text-center mt-3"></h4>
+  <form class=" bg-white px-4" action="">
+    <p class="fw-bold">Are pets allowed?</p>
+    <div class="form-check mb-2">
+      <input class="form-check-input" type="radio" name="exampleForm" id="pets_yes" />
+      <label class="form-check-label" for="radioExample1">
+        Yes
+      </label>
+    </div>
+    <div class="form-check mb-2">
+      <input class="form-check-input" type="radio" name="exampleForm" id="pets_no" />
+      <label class="form-check-label" for="radioExample2">
+        No
+      </label>
+    </div>
+    <div class="form-check mb-2">
+  </form>
+  <div class="text-end">
+    <button type="button" class="btn btn-primary">Submit</button>
+  </div>
+</div>
+{% endblock %}
