@@ -69,7 +69,6 @@ body {
 }
 form .user-details .input-box{
     margin-bottom: 15px;
-    width: calc(100%/2 - 20px);
 }
  .user-details .input-box details{
      display: block;
