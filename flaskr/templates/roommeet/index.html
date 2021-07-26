@@ -1,14 +1,9 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Roommeet{% endblock %}</h1>
-
-{% endblock %}
 
 {% block content %}
 
 <div>
-  <h1 class="middle">Roomeet</h1>
   <p id = "intro">You are logged in!</p>
 
   {% if g.user['verified'] == 0 %}
