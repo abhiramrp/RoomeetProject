@@ -1,22 +1,59 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Register{% endblock %}</h1>
-{% endblock %}
-
 {% block content %}
-  <form method="post">
-    <label for="username">Username</label>
-    <input name="username" id="username" required>
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required>
-    <label for="phone">Phone</label>
-    <input type="tel" name="phone" id="phone" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <label for="cpassword">Confirm Password</label>
-    <input type="password" name="cpassword" id="cpassword" required>
-    By clicking "Register", you agree to the <a href="https://docs.google.com/document/d/1Ho4h0hbFhs8piMVdtvyKe8SyvcMFHS6aTww1hdfFbxw/edit?usp=sharing">Terms and Conditions</a>
-    <input type="submit" value="Register">
-  </form>
+
+<form method="post">
+  <div class = "boxed">
+    <div class = "container">
+      <div class="title">Registration</div>
+      <form action = "#">
+          <div class="user-details">
+              <div class="input-box">
+                <span class="details" for="username">First Name</span>
+                <input name="username" id="username" placeholder = "Enter Your Username" required>
+              </div>
+              <div class="input-box">
+                <label class="details" for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder = "Enter Your Email" required>
+              </div>
+              <div class="input-box">
+                <label class="details" for="phone">Phone</label>
+                <input type="tel" name="phone" id="phone" placeholder = "Enter Your Phone Number" required>
+              </div>
+              <div class="input-box">
+                <label class="details" for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder = "Enter Your Password" required>
+              </div>
+              <div class="input-box">
+                <label class="details" for="cpassword">Confirm Password</label>
+                <input type="password" name="cpassword" id="cpassword" placeholder = "Confirm Password" required>
+              </div>
+          </div>
+          <!-- <div class="gender-details">
+              <input type="radio" name="gender" id="dot-1">
+              <input type="radio" name="gender" id="dot-2">
+              <input type="radio" name="gender" id="dot-3">
+              <span class = "gender-tittle">Gender</span>
+              <div class="category">
+                  <label for="dot-1">
+                      <span class="dot one"></span>
+                      <span class="gender">Male</span>
+                  </label>
+                  <label for="dot-2">
+                      <span class="dot two"></span>
+                      <span class="gender">Female</span>
+                  </label>
+                  <label for="dot-3">
+                      <span class="dot three"></span>
+                      <span class="gender">Other</span>
+                  </label>
+              </div>
+          </div> -->
+          <div class="button">
+              <input type="submit" value="Register">
+          </div>
+      </form>
+  </div>
+  </div>
+</form>
 {% endblock %}
