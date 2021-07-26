@@ -5,12 +5,21 @@
 {% endblock %}
 
 {% block content %}
+
   <form method="post">
-    <label for="zipcode">Zipcode</label>
-    <input type="number" name="zipcode" id="zipcode" required>
-    <label for="rent">Rent</label>
-    <input type="number" name="rent" id="rent" required>
-    <input type="submit" value="Create Housing">
+    <div class="form-group" >
+      <label for="zipcode">Zipcode</label>
+      <input type="number" class="form-control" name="zipcode" id="zipcode" required>
+
+      <label for="rent">Rent</label>
+      <input type="number" class="form-control" name="rent" id="rent" required>
+
+      <label for="details">Any further information</label>
+      <textarea class="form-control" id="details" rows="3"></textarea>
+
+      <input type="submit" class="btn btn-primary" value="Create Housing">
+    </div>
   </form>
+
 
 {% endblock %}
