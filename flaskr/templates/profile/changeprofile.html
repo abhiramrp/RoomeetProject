@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Change Profile{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="fname">First Name</label>
+    <input name="fname" id="fname" value="{{ profile['first_name'] }}">
+    <label for="mname">Middle Name</label>
+    <input name="mname" id="mname" value="{{ profile['middle_name'] }}">
+    <label for="lname">Last Name</label>
+    <input name="lname" id="lname" value="{{ profile['last_name'] }}">
+    <input type="submit" value="Change Profile">
+  </form>
+
+{% endblock %}

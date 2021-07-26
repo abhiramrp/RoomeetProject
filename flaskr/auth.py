@@ -57,7 +57,7 @@ def register():
 
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('roommeet.index'))
 
             # return redirect(url_for('auth.login'))
 
@@ -86,7 +86,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('roommeet.index'))
 
         flash(error)
 
@@ -157,7 +157,7 @@ def change_account():
                 (username, email, phone, generate_password_hash(password), user_id)
             )
             db.commit()
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('roommeet.index'))
 
         flash(error)
 
@@ -173,6 +173,45 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
+@bp.route('/changepassword', methods=('GET', 'POST'))
+def change_password():
+    user_id = session.get('user_id')
+
+    db = get_db()
+
+    error = None
+
+    user = db.execute(
+            'SELECT * FROM user WHERE id = ?', (user_id,)
+    ).fetchone()
+
+    if request.method == 'POST':
+        oldpass = request.form['oldpass']
+        newpass = request.form['newpass']
+        newpassc = request.form['newpassc']
+
+        if newpass != newpassc:
+            error = 'Passwords not matching'
+    
+        if not check_password_hash(user['password'], oldpass):
+            error = 'Incorrect password.'
+
+        if error is None:
+            db.execute('UPDATE user SET password = ?'
+                'WHERE id = ?',
+                (generate_password_hash(newpass), user_id))
+
+            db.commit()
+
+
+            session.clear()
+            session['user_id'] = user['id']
+            return redirect(url_for('roommeet.index'))
+
+        flash(error)
+    
+    return render_template('auth/changepassword.html')
 
 
 @bp.route('/deleteaccount', methods=('GET', 'POST'))
@@ -199,17 +238,17 @@ def delete_account():
 
         if error is None:
             db.execute('DELETE FROM user WHERE id = ?', (user_id)) 
+            db.commit()
             session.clear()
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('roommeet.index'))
 
         flash(error)
     
     return render_template('auth/deleteaccount.html')
 
-
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('blog.index'))
+    return redirect(url_for('roommeet.index'))
 
 

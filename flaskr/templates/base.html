@@ -6,6 +6,12 @@
   <ul>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
+      {% if g.user['verified'] == 0 %}
+      <li><a href="{{ url_for('roommeet.create_profile') }}">Create Profile</a>
+      {% else %}
+      <li><a href="{{ url_for('roommeet.change_profile') }}">Change Profile</a>
+      <li><a href="{{ url_for('roommeet.create_housing') }}">Create Housing</a>
+      {% endif %}
       <li><a href="{{ url_for('auth.change_account') }}">Account Settings</a>
       <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
     {% else %}

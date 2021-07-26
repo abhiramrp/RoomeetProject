@@ -1,26 +1,28 @@
 DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS profile;
+DROP TABLE IF EXISTS housing;
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE NOT NULL,
   email TEXT UNIQUE NOT NULL, 
   phone TEXT UNIQUE NOT NULL, 
-  password TEXT NOT NULL
-);
-
-CREATE TABLE post (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  title TEXT NOT NULL,
-  body TEXT NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES user (id)
+  password TEXT NOT NULL,
+  verified INTEGER DEFAULT 0
 );
 
 CREATE TABLE profile (
+  user_id INTEGER NOT NULL,
   first_name TEXT NOT NULL,
   middle_name TEXT, 
-  last_name TEXT NOT NULL
+  last_name TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES user (id)
+);
+
+CREATE TABLE housing (
+  housing_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  poster_id INTEGER NOT NULL, 
+  zipcode INTEGER NOT NULL,
+  rent INTEGER NOT NULL,
+  FOREIGN KEY (poster_id) REFERENCES user (id)
 );
