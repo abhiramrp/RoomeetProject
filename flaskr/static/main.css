@@ -45,10 +45,9 @@ body {
 }
 .boxed{
     display: flex;
-    height: 100vh;
+    height: 50vh;
     justify-content: center;
-    align-items: center;
-    background: linear-gradient(45deg, #19dfc5, #f84646);
+    align-items: center; 
 }
 .boxed .container{
     max-width: 700px;
