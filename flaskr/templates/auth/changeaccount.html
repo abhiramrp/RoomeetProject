@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Account Settings{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="username">Username</label>
+    <input name="username" id="username" value="{{g.user['username']}}">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" value="{{g.user['email']}}">
+    <label for="phone">Phone</label>
+    <input type="tel" name="phone" id="phone" value="{{g.user['phone']}}">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+    <input type="submit" value="Change Account">
+  </form>
+
+
+  <a href="{{ url_for('auth.change_password') }}">Change Password</a>
+  <a href="{{ url_for('auth.delete_account') }}">Delete Account</a>
+{% endblock %}

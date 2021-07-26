@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Delete Account{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+    <label for="cpassword">Confirm Password</label>
+    <input type="password" name="cpassword" id="cpassword" required>
+    By pressing "Delete Account", your account and related data will be deleted. 
+    <input type="submit" value="Delete Account">
+  </form>
+
+{% endblock %}
