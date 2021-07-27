@@ -7,7 +7,7 @@
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
       {% if g.user['verified'] == 0 %}
-      <li><a href="{{ url_for('roommeet.create_profile') }}">Create Profile</a>
+      <li><a href="{{ url_for('roommeet.create_profile') }}">Complete Profile</a>
       {% else %}
       <li><a href="{{ url_for('roommeet.change_profile') }}">Change Profile</a>
       <li><a href="{{ url_for('roommeet.create_housing') }}">Create Housing</a>
