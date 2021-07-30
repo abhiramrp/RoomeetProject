@@ -2,7 +2,7 @@
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 <nav>
-  <h1>Roomeet</h1>
+  <h1><a href="{{ url_for('roommeet.index') }}">Roomeet</a></h1>
   <ul>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>

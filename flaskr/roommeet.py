@@ -29,6 +29,21 @@ def create_profile():
         fname = request.form['fname']
         mname = request.form['mname']
         lname = request.form['lname']
+        occupation = request.form['occupation']
+        description = request.form['description']
+        gender = request.form['gender']
+        genderPref = request.form['genderPref']
+
+        minage = request.form['minage']
+        maxage = request.form['maxage']
+
+        minprice = request.form['minprice']
+        maxprice = request.form['maxprice']
+
+        city = request.form['city']
+        state = request.form['state']
+        zipcode = request.form['zipcode']
+        pets = request.form['pets']
 
         if not fname:
             error = 'First Name is required.'
@@ -38,10 +53,41 @@ def create_profile():
         if not mname:
             mname = ""
 
+        if not occupation: 
+            error = 'Occupation is required'
+
+        if not description:
+            description = ""
+        
+        if (minage < 17) or (minage >= maxage):
+            error = 'Please enter age values. Must be more than 17 and Maximum Age should be greater' 
+        
+        if (minprice < 0) or (minprice > maxprice):
+            error = 'Please enter price values. Maximum price should be greater' 
+
+        if gender == "":
+            error = 'Gender is required'
+        
+        if genderPref == "":
+            error = 'Gender Preferences are required'
+
+        if city is None:
+            error = 'City is required'
+
+        if state is None:
+            error = 'State is required'
+        
+        if zipcode is None:
+            error = 'Zipcode is required'
+
+        if pets == "":
+            error = 'Pet preference is required'
+
         if error is None:
             db.execute(
-                'INSERT INTO profile (user_id, first_name, middle_name, last_name) VALUES (?, ?, ?, ?)',
-                (user_id, fname, mname, lname)
+                'INSERT INTO profile (user_id, first_name, middle_name, last_name, occupation, description, gender,'
+                'genderPref, ageMin,ageMax,priceMin,priceMax,location, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (user_id, fname, mname, lname, occupation, description, gender, genderPref, minage, maxage, minprice, maxprice, city, state, zipcode, pets)
             )
 
             db.execute(
@@ -86,17 +132,71 @@ def change_profile():
         lname = request.form['lname']
 
         if not fname:
-            error = 'Username is required.'
+            error = 'First name is required.'
         elif not lname:
-            error = 'Password is required.'
+            error = 'Last Name is required.'
         
         if not mname:
             mname = ""
 
+        occupation = request.form['occupation']
+        description = request.form['description']
+        gender = request.form['gender']
+        genderPref = request.form['genderPref']
+
+        minage = request.form['minage']
+        maxage = request.form['maxage']
+
+        minprice = request.form['minprice']
+        maxprice = request.form['maxprice']
+
+        city = request.form['city']
+        state = request.form['state']
+        zipcode = request.form['zipcode']
+        pets = request.form['pets']
+
+        if not fname:
+            error = 'First Name is required.'
+        elif not lname:
+            error = 'Last Name is required.'
+        
+        if not mname:
+            mname = ""
+
+        if not occupation: 
+            error = 'Occupation is required'
+
+        if not description:
+            description = ""
+        
+        if (minage < 17) or (minage >= maxage):
+            error = 'Please enter age values. Must be more than 17 and Maximum Age should be greater' 
+        
+        if (minprice < 0) or (minprice > maxprice):
+            error = 'Please enter price values. Maximum price should be greater' 
+
+        if gender == "":
+            error = 'Gender is required'
+        
+        if genderPref == "":
+            error = 'Gender Preferences are required'
+
+        if city is None:
+            error = 'City is required'
+
+        if state is None:
+            error = 'State is required'
+        
+        if zipcode is None:
+            error = 'Zipcode is required'
+
+        if pets == "":
+            error = 'Pet preference is required'
+
         if error is None:
             db.execute(
-                'UPDATE profile SET first_name = ?, middle_name = ?, last_name = ?' 
-                'WHERE user_id = ?', (fname, mname, lname, user_id)
+                'UPDATE profile SET first_name = ?, middle_name = ?, last_name = ?, occupation= ?, description= ?, gender= ?, genderPref= ?, ageMin= ?,ageMax= ?,priceMin= ?,priceMax= ?,location= ?, city= ?, state=?' 
+                'WHERE user_id = ?', (fname, mname, lname, occupation, description, gender, genderPref, minage, maxage, minprice, maxprice, city, state, zipcode, pets, user_id)
             )
 
             db.commit()
