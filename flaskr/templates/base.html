@@ -14,7 +14,7 @@
       <li class="nav-item active"><span class="nav-link">{{ g.user['username'] }}</span>
       {% if g.user['verified'] == 0 %}
       <li class="nav-item active"><a class="nav-link" href="{{ url_for('roommeet.create_profile') }}">Create Profile</a>
-      <li class="nav-item active"><a class="nav-link" href="{{ url_for('roommeet.create_housing') }}">Create Housing</a>
+
       {% else %}
       <li class="nav-item active"><a class="nav-link" href="{{ url_for('roommeet.change_profile') }}">Change Profile</a>
       <li class="nav-item active"><a class="nav-link" href="{{ url_for('roommeet.create_housing') }}">Create Housing</a>
