@@ -10,7 +10,7 @@
       <li><a href="{{ url_for('roommeet.create_profile') }}">Complete Profile</a>
       {% else %}
       <li><a href="{{ url_for('roommeet.change_profile') }}">Change Profile</a>
-      <li><a href="{{ url_for('roommeet.create_housing') }}">Create Housing</a>
+      <li><a href="{{ url_for('roommeet.view_profile', profid=(g.user['id'])) }}">View Profile</a>
       {% endif %}
       <li><a href="{{ url_for('auth.change_account') }}">Account Settings</a>
       <li><a href="{{ url_for('auth.logout') }}">Log Out</a>

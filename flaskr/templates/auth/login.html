@@ -1,26 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  </form>
-  <form method="post">
-    <div class = "boxed">
-      <div class = "container">
-        <div class="title">Log In</div>
-        <form action = "#">
-          <div class="user-details">
-            <div class="input-box">
-              <label for="username">Username</label>
-              <input name="username" id="username" placeholder = "Enter Your Username" required>
-            </div>
-            <div class="input-box">
-              <label for="password">Password</label>
-              <input type="password" name="password" id="password" placeholder= "Enter your Password"required>
-            </div>
-            <div class="button">
-              <input type="submit" value="Log In">
-            </div>
-        </form>
-    </div>
-    </div>
-  </form>
+  
+
+    <h1>Log In</h1>  
+    <form method="post">
+      
+      <label for="username">Username</label>
+      <input name="username" id="username" placeholder = "Enter Your Username" required>
+                
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" placeholder= "Enter your Password"required>
+
+      <input type="submit" value="Log In">
+  
+    </form>
+  
 {% endblock %}

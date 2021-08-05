@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}
+<br>
+<image src="{{ url_for('static', filename=photopath ) }}" ></image>
+<br>
+{{ profile['occupation']}}
+
+{{ age }}
+
+{% endblock %}

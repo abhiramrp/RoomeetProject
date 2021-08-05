@@ -1,16 +1,30 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for, session
+    Blueprint, Flask, flash, g, redirect, render_template, request, url_for, session, current_app
 )
 from werkzeug.exceptions import abort
+from werkzeug.utils import secure_filename
+
+from datetime import datetime, date
+
+import os
 
 from flaskr.auth import login_required
 from flaskr.db import get_db
+from flaskr.__init__ import create_app
+
 
 bp = Blueprint('roommeet', __name__)
 
+app = create_app()
+
+
+app.config["PROFILE_UPLOADS"] = "/Users/abhiram/Documents/GitHub/RoomeetProject/flaskr/static/images/profiles"
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+app.config["ALLOWED_EXTENSIONS"] = ALLOWED_EXTENSIONS
+
 @bp.route('/')
 def index():
-    if not session.get("user_id"):
+    if (g.user == None):
         return render_template("roommeet/home.html")
     
     return render_template('roommeet/index.html')
@@ -29,6 +43,7 @@ def create_profile():
         fname = request.form['fname']
         mname = request.form['mname']
         lname = request.form['lname']
+        dob = request.form['dob']
         occupation = request.form['occupation']
         description = request.form['description']
         gender = request.form['gender']
@@ -44,6 +59,7 @@ def create_profile():
         state = request.form['state']
         zipcode = request.form['zipcode']
         pets = request.form['pets']
+        looking = request.form['looking']
 
         if not fname:
             error = 'First Name is required.'
@@ -59,10 +75,23 @@ def create_profile():
         if not description:
             description = ""
         
-        if (minage < 17) or (minage >= maxage):
+        if not dob:
+            error = "Need date of birth"
+
+        if get_age(dob) == -1:
+            error = "You must be at least 17 years. "
+
+        
+        if ((not minage) or (not maxage)):
+            error = 'Please enter age values. Must be more than 17 and Maximum Age should be greater'
+
+        if ((int(minage) < 17) or (int(minage) >= int(maxage))):
             error = 'Please enter age values. Must be more than 17 and Maximum Age should be greater' 
         
-        if (minprice < 0) or (minprice > maxprice):
+        if ((not minprice) or (not maxprice)):
+            error = 'Please enter price values. Maximum price should be greater'
+
+        if (int(minprice) < 0) or (int(minprice) > int(maxprice)):
             error = 'Please enter price values. Maximum price should be greater' 
 
         if gender == "":
@@ -83,30 +112,68 @@ def create_profile():
         if pets == "":
             error = 'Pet preference is required'
 
-        if error is None:
-            db.execute(
-                'INSERT INTO profile (user_id, first_name, middle_name, last_name, occupation, description, gender,'
-                'genderPref, ageMin,ageMax,priceMin,priceMax,location, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                (user_id, fname, mname, lname, occupation, description, gender, genderPref, minage, maxage, minprice, maxprice, city, state, zipcode, pets)
-            )
+        if looking == "":
+            error = 'Search preferences are required.'
 
-            db.execute(
-                'UPDATE user SET verified = ?'
-                'WHERE id = ?', (1, user_id)
-            )
-            db.commit()
+        if 'photo' not in request.files:
+            error = 'Missing Image'
 
-            return redirect(url_for('roommeet.index'))
+        photo = request.files['photo']
+        photoname = ''
+
+        if photo.filename == '':
+
+            error ='No selected file'
+
+
+        if photo and allowed_file(photo.filename):
+            photoname = secure_filename(photo.filename)
+
+            photo.save(os.path.join(app.config['PROFILE_UPLOADS'], photoname))
+
+
+            if error is None:
+                db.execute(
+                    'INSERT INTO profile (user_id, first_name, middle_name, last_name, photo, dob, occupation, description, gender,'
+                    'genderPref, ageMin,ageMax,priceMin,priceMax, city, state, zipcode, pets, looking) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                    (user_id, fname, mname, lname, photoname, dob, occupation, description, gender, genderPref, int(minage), int(maxage), int(minprice), int(maxprice), city, state, int(zipcode), pets, looking)
+                )
+
+                db.execute(
+                    'UPDATE user SET verified = ?'
+                    'WHERE id = ?', (1, user_id)
+                )
+                db.commit()
+
+                return redirect(url_for('roommeet.index'))
         
         flash(error)
 
     return render_template('profile/createprofile.html')
 
 
+def get_age(bdate):
+    dt = datetime.strptime(bdate, '%Y-%m-%d')
+    d = dt.date()
+    today = date.today()
+
+    age = today.year - d.year - ((today.month, today.day) < (d.month, d.day))
+
+    if age >= 17:
+        return age
+
+    return -1
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 def get_profile(id):
 
     profile = get_db().execute(
-        'SELECT user_id, first_name, middle_name, last_name FROM profile WHERE user_id = ?', (id,)
+        'SELECT user_id, first_name, middle_name, last_name, dob, photo, occupation, description, gender, genderPref, ageMin,ageMax,priceMin,priceMax, city, state, zipcode, pets, looking FROM profile WHERE user_id = ?', (id,)
     ).fetchone()
 
     if profile is None:
@@ -122,6 +189,9 @@ def change_profile():
 
     profile = get_profile(user_id)
 
+    photopath = 'images/profiles/'+profile['photo']
+
+
     db = get_db()
 
     error = None
@@ -131,14 +201,7 @@ def change_profile():
         mname = request.form['mname']
         lname = request.form['lname']
 
-        if not fname:
-            error = 'First name is required.'
-        elif not lname:
-            error = 'Last Name is required.'
-        
-        if not mname:
-            mname = ""
-
+        dob = request.form['dob']
         occupation = request.form['occupation']
         description = request.form['description']
         gender = request.form['gender']
@@ -154,6 +217,7 @@ def change_profile():
         state = request.form['state']
         zipcode = request.form['zipcode']
         pets = request.form['pets']
+        looking = request.form['looking']
 
         if not fname:
             error = 'First Name is required.'
@@ -168,11 +232,27 @@ def change_profile():
 
         if not description:
             description = ""
+
+        if not dob:
+            error = "Need date of birth"
         
-        if (minage < 17) or (minage >= maxage):
+        if get_age(dob) == -1:
+            error = "You must be at least 17 years. "
+        
+
+
+        if ((not minage) or (not maxage) or (minage == ' ') or (maxage == ' ')):
+            error = 'Please enter age values. Must be more than 17 and Maximum Age should be greater'
+
+
+
+        if (int(minage) < 17) or (minage >= maxage):
             error = 'Please enter age values. Must be more than 17 and Maximum Age should be greater' 
         
-        if (minprice < 0) or (minprice > maxprice):
+        if ((not minprice) or (not maxprice)):
+            error = 'Please enter price values. Maximum price should be greater'
+
+        if (int(minprice) < 0) or (minprice > maxprice):
             error = 'Please enter price values. Maximum price should be greater' 
 
         if gender == "":
@@ -193,68 +273,55 @@ def change_profile():
         if pets == "":
             error = 'Pet preference is required'
 
-        if error is None:
-            db.execute(
-                'UPDATE profile SET first_name = ?, middle_name = ?, last_name = ?, occupation= ?, description= ?, gender= ?, genderPref= ?, ageMin= ?,ageMax= ?,priceMin= ?,priceMax= ?,location= ?, city= ?, state=?' 
-                'WHERE user_id = ?', (fname, mname, lname, occupation, description, gender, genderPref, minage, maxage, minprice, maxprice, city, state, zipcode, pets, user_id)
-            )
-
-            db.commit()
-
-            return redirect(url_for('roommeet.index'))
-
-    return render_template('profile/changeprofile.html', profile=profile)
-
-
-def get_housing(housing_id):
-
-    housing = get_db().execute(
-        'SELECT housing_id, poster_id, zipcode, rent FROM profile WHERE housing_id = ?', (housing_id,)
-    ).fetchone()
-
-    if housing is None:
-        abort(404, f"Profile doesn't exist. Create a profile.")
-
-    return housing
-
-
-@bp.route('/createhousing', methods=('GET', 'POST'))
-@login_required
-def create_housing():
-    user_id = session.get('user_id')
-
-    db = get_db()
-
-    user = db.execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
-    ).fetchone()
-
-    error = None
-
-    if request.method == 'POST':
-        zipcode = request.form['zipcode']
-        rent = request.form['rent']
-
-        if not zipcode:
-            error = "Please enter zipcode"
-        
-        if not rent:
-            error = "Please enter rent"
-
-        if user['verified'] == 0:
-            error = "User not verified. Please create a profile"
+        if looking == "":
+            error = 'Search preferences are required.'
 
         
-        if error is None:
-            db.execute(
-                'INSERT INTO housing (poster_id, zipcode, rent) VALUES (?, ?, ?)',
-                (user_id, zipcode, rent)
-            )
+        if 'photo' not in request.files:
+            error = 'Missing Image'
 
-            db.commit()
+        photo = request.files['photo']
+        photoname = None
 
-            return redirect(url_for('roommeet.index'))
+        if photo.filename is None:
+            error = 'No selected file'
 
+
+        if photo and allowed_file(photo.filename):
+            photoname = secure_filename(photo.filename)
+
+            photo.save(os.path.join(app.config['PROFILE_UPLOADS'], photoname))
+
+
+            if error is None:
+
+                db.execute(
+                    'UPDATE profile SET first_name = ?, middle_name = ?, last_name = ?, dob = ?, photo=?, occupation= ?, description= ?, gender= ?, genderPref= ?, ageMin= ?,ageMax= ?,priceMin= ?,priceMax= ?, city= ?, state=?, zipcode=?, pets=?, looking=?' 
+                    'WHERE user_id = ?', (fname, mname, lname, dob, photoname, occupation, description, gender, genderPref, int(minage), int(maxage), int(minprice), int(maxprice), city, state, int(zipcode), pets, looking, user_id)
+                )
+
+                db.commit()
+
+                return redirect(url_for('roommeet.index'))
+
+        error = 'upload the right file'
+        
         flash(error)
-    
-    return render_template('housing/createhousing.html')
+
+    return render_template('profile/changeprofile.html', profile=profile, photopath=photopath)
+
+
+
+@bp.route('/viewprofile', defaults={'profid': None})
+@bp.route('/viewprofile/<int:profid>')
+@login_required
+def view_profile(profid):
+    profile = get_profile(profid)
+
+    age = get_age(profile['dob'])
+
+    photopath = 'images/profiles/'+profile['photo']
+
+    return render_template('profile/viewprofile.html', profile=profile, photopath=photopath, age=age)
+
+

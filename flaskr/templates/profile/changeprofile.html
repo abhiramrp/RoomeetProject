@@ -5,32 +5,38 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post">
+  <form method="post"  enctype = "multipart/form-data">
+
     <label for="fname">First Name</label>
     <input name="fname" id="fname" value="{{ profile['first_name'] }}">
     <label for="mname">Middle Name</label>
     <input name="mname" id="mname" value="{{ profile['middle_name'] }}">
     <label for="lname">Last Name</label>
     <input name="lname" id="lname" value="{{ profile['last_name'] }}">
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob" value="{{ profile['dob'] }}">
+
+    <label for="photo">Photo</label>
+    <input type="file" id="photo" name="photo" value="{{ url_for('static', filename=photopath ) }}"  accept="image/*" }}>
+    
     <label for="occupation">Occupation</label>
     <input name="occupation" id="occupation" value="{{ profile['occupation'] }}">
     <label for="description">Description</label>
-    <textarea name="description" id="description" value="{{ profile['occupation'] }}"></textarea>
+    <textarea name="description" id="description">{{ profile['description'] }}</textarea>
 
     <label for="gender">Gender:</label>
     <select name="gender" id="gender">
-      <option value=""></option>
+      <option value="O">Other</option>
       <option value="M">Male</option>
       <option value="F">Female</option>
-      <option value="O">Other</option>
     </select>
 
     <label for="genderPref">Gender Preferences:</label>
     <select name="genderPref" id="genderPref">
-      <option value=""></option>
+      <option value="C">Co-Ed</option>
       <option value="M">Males Only</option>
       <option value="F">Females Only</option>
-      <option value="C">Co-Ed</option>
       <option value="I">Independent</option>
     </select>
 
@@ -109,9 +115,15 @@
 
     <label for="pets">Pets:</label>
     <select name="pets" id="pets">
-      <option value=""></option>
       <option value="Y">Yes</option>
       <option value="N">No</option>
+    </select>
+
+    <label for="looking">Looking for: </label>
+    <select name="looking" id="looking">
+      <option value="B">Roommates and Housing</option>
+      <option value="H">Housing Only</option>
+      <option value="R">Roommates Only</option>
     </select>
  
 
