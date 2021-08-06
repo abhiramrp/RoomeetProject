@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{{housing['street'] }}
+<br>
+<image src="{{ url_for('static', filename=photopath ) }}" ></image>
+<br>
+
+
+
+{% endblock %}

@@ -30,9 +30,16 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.bp)
 
+
+
     from . import roommeet
     app.register_blueprint(roommeet.bp)
     app.add_url_rule('/', endpoint='index')
+
+    from . import housing
+    app.register_blueprint(housing.bp)
+
+
 
     return app
 

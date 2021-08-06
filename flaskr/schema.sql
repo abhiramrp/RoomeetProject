@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS profile;
+DROP TABLE IF EXISTS housing; 
 
 
 CREATE TABLE user (
@@ -43,6 +44,34 @@ CREATE TABLE profile (
   looking TEXT NOT NULL, 
 
   FOREIGN KEY (user_id) REFERENCES user (id)
+);
+
+CREATE TABLE housing (
+  housing_id INTEGER PRIMARY KEY AUTOINCREMENT, 
+  poster_id INTEGER NOT NULL, 
+
+  photo BLOB NOT NULL, 
+  description TEXT,
+
+  housing_number INTEGER NOT NULL, 
+  apt_number TEXT NOT NULL, 
+  street TEXT NOT NULL, 
+  city TEXT NOT NULL,
+  state TEXT NOT NULL,
+  zipcode INTEGER NOT NULL,
+
+  rent INTEGER NOT NULL,
+
+  pets TEXT NOT NULL,
+  genderPref TEXT NOT NULL,
+
+  ageMin INTEGER NOT NULL,
+  ageMax INTEGER NOT NULL,
+
+
+  FOREIGN KEY (poster_id) REFERENCES user (id)
+
+
 );
 
 
