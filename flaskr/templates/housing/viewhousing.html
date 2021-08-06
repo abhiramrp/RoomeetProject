@@ -2,12 +2,13 @@
 
 
 {% block content %}
-
+<a href="{{ url_for('roommeet.view_profile', profid=(housing['poster_id'])) }}">View Post Owner</a>
+<br>
 {{housing['street'] }}
 <br>
 <image src="{{ url_for('static', filename=photopath ) }}" ></image>
 <br>
-
+<a href="{{ url_for('housing.change_housing', houseid=(housing['housing_id'])) }}">Change Housing</a>
 
 
 {% endblock %}

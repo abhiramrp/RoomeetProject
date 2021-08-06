@@ -172,7 +172,7 @@ def allowed_file(filename):
 def get_profile(id):
 
     profile = get_db().execute(
-        'SELECT user_id, first_name, middle_name, last_name, dob, photo, occupation, description, gender, genderPref, ageMin,ageMax,priceMin,priceMax, city, state, zipcode, pets, looking FROM profile WHERE user_id = ?', (id,)
+        'SELECT * FROM profile WHERE user_id = ?', (id,)
     ).fetchone()
 
     if profile is None:

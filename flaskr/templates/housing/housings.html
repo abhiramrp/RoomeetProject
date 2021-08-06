@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>Your housings</h1>
+
+{% for h in hlist %}
+<a href="{{ url_for('housing.view_housing', houseid=(h)) }}">Housing {{h}} </a>
+<br>
+
+
+{% endfor %}
+
+
+<a href="{{ url_for('housing.create_housing') }}">Complete Profile</a>
+
+{% endblock %}
