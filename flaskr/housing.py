@@ -112,7 +112,7 @@ def create_housing():
 
                 db.commit()
 
-                return redirect(url_for('roommeet.index'))
+                return redirect(url_for('housing.housings'))
             
         
         flash(error)
@@ -165,7 +165,7 @@ def change_housing(houseid):
     error = None
 
     if housing['poster_id'] != user_id:
-        return redirect(url_for('roommeet.index'))
+        return redirect(url_for('housing.housings'))
 
 
     if request.method == 'POST':
@@ -251,7 +251,7 @@ def change_housing(houseid):
 
                 db.commit()
 
-                return redirect(url_for('roommeet.index'))
+                return redirect(url_for('housing.housings'))
 
             error = 'upload the right file'
             
@@ -280,7 +280,7 @@ def delete_housing(houseid):
         db.commit()
 
 
-    return redirect(url_for('roommeet.index'))
+    return redirect(url_for('housing.housings'))
     
 
 @bp.route('/housings')
@@ -299,6 +299,7 @@ def housings():
     for h in housings:
         for i in h:
             housinglist.append(i)
+
 
 
     return render_template('housing/housings.html', hlist = housinglist)

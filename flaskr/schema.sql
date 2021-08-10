@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS profile;
 DROP TABLE IF EXISTS housing; 
+DROP TABLE IF EXISTS matchpairing;
+DROP TABLE IF EXISTS housepairing;
 
 
 CREATE TABLE user (
@@ -73,6 +75,28 @@ CREATE TABLE housing (
 
 
 );
+
+
+CREATE TABLE matchpairing (
+  user_id INTEGER NOT NULL, 
+  match_id INTEGER NOT NULL, 
+
+  FOREIGN KEY (user_id) REFERENCES user (id),
+  FOREIGN KEY (match_id) REFERENCES user (id)
+);
+
+
+
+CREATE TABLE housepairing (
+  user_id INTEGER NOT NULL, 
+  house_id INTEGER NOT NULL, 
+
+  FOREIGN KEY (user_id) REFERENCES user (id),
+  FOREIGN KEY (house_id) REFERENCES user (id)
+);
+
+
+
 
 
 

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}
+<br>
+<image src="{{ url_for('static', filename=photopath ) }}" ></image>
+<br>
+{{ profile['occupation']}}
+
+{{ age }}
+
+<a href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=0 ) }}">Ignore</a>
+
+<a href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=1) }}">Like</a>
+
+{% endblock %}

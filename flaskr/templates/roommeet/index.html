@@ -9,7 +9,7 @@
   {% if g.user['verified'] == 0 %}
     <a href="{{ url_for('roommeet.create_profile') }}">Create Profile</a>
   {% else %}
-    Welcome, USER!
+  <a href="{{ url_for('algorithm.matchrandom') }}">Start Matching</a>
   {% endif %}
 
 </div>
