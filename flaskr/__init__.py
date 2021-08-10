@@ -39,6 +39,9 @@ def create_app(test_config=None):
     from . import housing
     app.register_blueprint(housing.bp)
 
+    from . import algorithm
+    app.register_blueprint(algorithm.bp)
+
 
 
     return app
