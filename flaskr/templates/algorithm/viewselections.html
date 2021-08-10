@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>Your selections</h1>
+
+{% for m in mlist %}
+
+<a href="{{ url_for('roommeet.view_profile', profid=(m['poster_id'])) }}">{{ m['first_name'] }} {{ m['middle_name'] }} {{ m['last_name'] }}</a>
+<br>
+
+
+{% endfor %}
+
+
+{% endblock %}

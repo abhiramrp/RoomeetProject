@@ -94,9 +94,6 @@ def matchlike(id, liketype):
     db = get_db()
 
 
-
-    print(liketype, type(liketype))
-
     if liketype == 1: 
         user_id = session.get('user_id')
 
@@ -108,6 +105,8 @@ def matchlike(id, liketype):
     print("Going to matchnext")
 
     matchnext(id)
+
+    return redirect(url_for(matchrandom()))
     
 
 @bp.route('/match/')
@@ -128,7 +127,7 @@ def matchrandom():
 
 
 def matchnext(id):
-    # profilelist = get_profile_ids()
+    profilelist = get_profile_ids()
 
     idloc = profilelist.index(id) + 1
 
@@ -144,6 +143,55 @@ def matchnext(id):
 
     return render_template('algorithm/profile.html', profile=rp, photopath=photopath, age=age)
 
+
+@bp.route('/selections')
+def selections():
+    user_id = session.get('user_id')
+
+
+    m = get_db().execute(
+        'SELECT match_id FROM matchpairing WHERE user_id = ?', (user_id,)
+    ).fetchall()
+
+    profiles = []
+
+    for match in m:
+        for i in match:
+            p = get_profile(i)
+            profiles.append(p)
+    
+
+    return render_template('algorithm/viewselections.html', mlist = profiles)
+
+
+@bp.route('/matches')
+def selections():
+    user_id = session.get('user_id')
+
+
+    m = get_db().execute(
+        'SELECT match_id FROM matchpairing WHERE user_id = ?', (user_id,)
+    ).fetchall()
+
+    profile_ids = []
+    profiles = []
+
+    for match in m:
+        for i in match:
+            profile_ids.append(i)
+
+    for i in profile_ids:
+        p = get_db().execute(
+            'SELECT match_id FROM matchpairing WHERE user_id = ? AND match_id = ?', (user_id, i)
+        ).fetchone()
+
+        if p is not None:
+            profiles.append(get_profile(i))
+
+
+
+
+    return render_template('algorithm/viewselections.html', mlist = profiles)
 
 
 
