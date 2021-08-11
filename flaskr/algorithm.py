@@ -106,7 +106,7 @@ def matchlike(id, liketype):
 
     matchnext(id)
 
-    return redirect(url_for(matchrandom()))
+    return redirect(url_for(matchlike(id=id, liketype=liketype)))
     
 
 @bp.route('/match/')
@@ -128,6 +128,8 @@ def matchrandom():
 
 def matchnext(id):
     profilelist = get_profile_ids()
+
+    print(profilelist)
 
     idloc = profilelist.index(id) + 1
 
@@ -165,7 +167,7 @@ def selections():
 
 
 @bp.route('/matches')
-def selections():
+def matches():
     user_id = session.get('user_id')
 
 
@@ -187,7 +189,6 @@ def selections():
 
         if p is not None:
             profiles.append(get_profile(i))
-
 
 
 
