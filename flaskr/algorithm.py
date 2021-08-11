@@ -184,7 +184,7 @@ def matches():
 
     for i in profile_ids:
         p = get_db().execute(
-            'SELECT match_id FROM matchpairing WHERE user_id = ? AND match_id = ?', (user_id, i)
+            'SELECT match_id FROM matchpairing WHERE user_id = ? AND match_id = ?', (i, user_id)
         ).fetchone()
 
         if p is not None:
@@ -192,7 +192,7 @@ def matches():
 
 
 
-    return render_template('algorithm/viewselections.html', mlist = profiles)
+    return render_template('algorithm/viewmatches.html', mlist = profiles)
 
 
 
