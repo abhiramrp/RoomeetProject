@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Create Housing{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+  <form method="post" class="bg-white px-4 row col-5">
+    <div>
+      <label for="zipcode">Zipcode</label>
+      <input type="number" class="form-control" name="zipcode" id="zipcode" required>
+
+      <label for="rent">Rent</label>
+      <input type="number" class="form-control" name="rent" id="rent" required>
+
+      <label for="details">Any further information</label>
+      <textarea class="form-control" id="details" name = "details" rows="3"></textarea>
+
+      <input type="submit" class="btn btn-primary" value="Create Housing">
+    </div>
+  </form>
+
+
+{% endblock %}
