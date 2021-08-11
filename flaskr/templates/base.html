@@ -2,7 +2,7 @@
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<nav>
+<!-- <nav>
   <h1><a href="{{ url_for('roommeet.index') }}">Roomeet</a></h1>
   <ul>
     {% if g.user %}
@@ -22,7 +22,33 @@
       <li><a href="{{ url_for('auth.login') }}">Log In</a>
     {% endif %}
   </ul>
+</nav> -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{{ url_for('roommeet.index') }}">Roomeet</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {% if g.user %}
+      <li class="nav-item active"><span>{{ g.user['username'] }}</span>
+      {% if g.user['verified'] == 0 %}
+      <li class="nav-item active"><a class="nav-link" href="{{ url_for('roommeet.create_profile') }}">Complete Profile</a>
+      {% else %}
+      <li class="nav-item active"><a class="nav-link" href="{{ url_for('roommeet.change_profile') }}">Change Profile</a>
+      <li class="nav-item active"><a class="nav-link" href="{{ url_for('roommeet.view_profile', profid=(g.user['id'])) }}">View Profile</a>
+      <li class="nav-item active"><a class="nav-link" href="{{ url_for('housing.housings') }}">Your Housings</a>
+
+      {% endif %}
+      <li class="nav-item active"><a class="nav-link" href="{{ url_for('auth.change_account') }}">Account Settings</a>
+      <li class="nav-item active"><a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
+    {% else %}
+      <li class="nav-item active"><a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+      <li class="nav-item active"><a class="nav-link" href="{{ url_for('auth.login') }}">Log In</a>
+    {% endif %}
+    </ul>
+  </div>
 </nav>
+
+
 <section class="content">
   <header>
     {% block header %}{% endblock %}
