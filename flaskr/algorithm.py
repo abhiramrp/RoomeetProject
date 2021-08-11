@@ -104,10 +104,24 @@ def matchlike(id, liketype):
 
     print("Going to matchnext")
 
-    matchnext(id)
+    profilelist = get_profile_ids()
 
-    return redirect(url_for(matchlike(id=id, liketype=liketype)))
-    
+    print(profilelist)
+
+    idloc = profilelist.index(id) + 1
+
+    print(profilelist)
+
+    if (idloc >= len(profilelist)):
+        idloc = 0
+
+    rp = get_profile(profilelist[idloc])
+
+    photopath = 'images/profiles/'+rp['photo']
+    age = get_age(rp['dob'])
+
+    return render_template('algorithm/profile.html', profile=rp, photopath=photopath, age=age)
+
 
 @bp.route('/match/')
 def matchrandom():
@@ -126,24 +140,7 @@ def matchrandom():
 
 
 
-def matchnext(id):
-    profilelist = get_profile_ids()
 
-    print(profilelist)
-
-    idloc = profilelist.index(id) + 1
-
-    print(profilelist)
-
-    if (idloc >= len(profilelist)):
-        idloc = 0
-
-    rp = get_profile(profilelist[idloc])
-
-    photopath = 'images/profiles/'+rp['photo']
-    age = get_age(rp['dob'])
-
-    return render_template('algorithm/profile.html', profile=rp, photopath=photopath, age=age)
 
 
 @bp.route('/selections')
