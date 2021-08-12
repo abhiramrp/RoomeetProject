@@ -9,11 +9,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       {% if g.user %}
-        <li class="nav-item active"><span class="nav-link disabled">{{ g.user['username'] }}</span>
         {% if g.user['verified'] == 0 %}
         <li class="nav-item active"><a class="nav-link" href="{{ url_for('roommeet.create_profile') }}">Complete Profile</a>
         {% else %}
-        <li class="nav-item active"><a class="nav-link" href="{{ url_for('roommeet.change_profile') }}">Change Profile</a>
         <li class="nav-item active"><a class="nav-link" href="{{ url_for('roommeet.view_profile', profid=(g.user['id'])) }}">View Profile</a>
         <li class="nav-item active"><a class="nav-link" href="{{ url_for('housing.housings') }}">Your Housings</a>
         <li class="nav-item active"><a class="nav-link" href="{{ url_for('algorithm.selections') }}">Your Selections</a>
