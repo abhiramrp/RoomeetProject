@@ -2,17 +2,25 @@
 
 
 {% block content %}
+<div class="boxed">
+    <div class="container">
+        <div class= "user-details">
+            <h1>{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}</h1>
+            <br>
+            <image src="{{ url_for('static', filename=photopath ) }}" ></image>
+            <br>
+            {{ profile['occupation']}}
 
-{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}
-<br>
-<image src="{{ url_for('static', filename=photopath ) }}" ></image>
-<br>
-{{ profile['occupation']}}
+            {{ age }}
 
-{{ age }}
+            <a href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=0 ) }}">Ignore</a>
 
-<a href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=0 ) }}">Ignore</a>
+            <a href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=1) }}">Like</a>
+        </div>
+    </div>
+</div>
 
-<a href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=1) }}">Like</a>
+
+
 
 {% endblock %}

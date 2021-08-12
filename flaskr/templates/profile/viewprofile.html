@@ -2,13 +2,19 @@
 
 
 {% block content %}
+<div class="boxed">
+    <div class="container">
+        <div class= "user-details">
+            <h1>{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}</h1>
+            <br>
+            <image src="{{ url_for('static', filename=photopath ) }}" ></image>
+            <br>
+            <h2>Occupation:</h2>{{ profile['occupation']}}
+            <h3>Age:</h3> {{ age }} 
+        </div>
+    </div>
+</div>
 
-{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}
-<br>
-<image src="{{ url_for('static', filename=photopath ) }}" ></image>
-<br>
-{{ profile['occupation']}}
 
-{{ age }}
 
 {% endblock %}

@@ -3,12 +3,25 @@
 
 {% block content %}
 
-<h1>Your selections</h1>
+<div class="boxed">
+    <div class="container">
+        <div class= "user-details">
+            <h1>Your selections</h1>
+        </div>
+    </div>
+</div>
 
 {% for m in mlist %}
+<div class="boxed">
+    <div class="container">
+        <div class= "user-details">
+            
+            <a href="{{ url_for('roommeet.view_profile', profid=(m['user_id'])) }}">{{ m['first_name'] }} {{ m['middle_name'] }} {{ m['last_name'] }}</a>
+            <br>
 
-<a href="{{ url_for('roommeet.view_profile', profid=(m['user_id'])) }}">{{ m['first_name'] }} {{ m['middle_name'] }} {{ m['last_name'] }}</a>
-<br>
+        </div>
+    </div>
+</div>
 
 
 {% endfor %}

@@ -40,7 +40,7 @@ body {
 
 .boxed{
     display: flex;
-    
+ 
     justify-content: center;
     align-items: center; 
 }
@@ -81,4 +81,3 @@ form .user-details .input-box{
    border-bottom-width: 2px;
    transition: all 0.3s ease;
 }
-

@@ -1,134 +1,157 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Change Profile{% endblock %}</h1>
-{% endblock %}
 
 {% block content %}
-  <form method="post"  enctype = "multipart/form-data">
 
-    <label for="fname">First Name</label>
-    <input name="fname" id="fname" value="{{ profile['first_name'] }}">
-    <label for="mname">Middle Name</label>
-    <input name="mname" id="mname" value="{{ profile['middle_name'] }}">
-    <label for="lname">Last Name</label>
-    <input name="lname" id="lname" value="{{ profile['last_name'] }}">
+  <div class="boxed">
+    <div class="container">
+      <div class= "user-details">
+        <form method="post" enctype = "multipart/form-data">
+          <form method="post"  enctype = "multipart/form-data">
 
-    <label for="dob">Date of Birth:</label>
-    <input type="date" id="dob" name="dob" value="{{ profile['dob'] }}">
+            <h1>Changing profile</h1>
 
-    <label for="photo">Photo</label>
-    <input type="file" id="photo" name="photo" value="{{ url_for('static', filename=photopath ) }}"  accept="image/*" }}>
-    
-    <label for="occupation">Occupation</label>
-    <input name="occupation" id="occupation" value="{{ profile['occupation'] }}">
-    <label for="description">Description</label>
-    <textarea name="description" id="description">{{ profile['description'] }}</textarea>
+            <div class = "input-box">
+              <label for="fname">First Name</label>
+              <input name="fname" id="fname" value="{{ profile['first_name'] }}">
+           
 
-    <label for="gender">Gender:</label>
-    <select name="gender" id="gender">
-      <option value="O">Other</option>
-      <option value="M">Male</option>
-      <option value="F">Female</option>
-    </select>
+            <label for="mname">Middle Name</label>
+            <input name="mname" id="mname" value="{{ profile['middle_name'] }}">
+            <label for="lname">Last Name</label>
+            <input name="lname" id="lname" value="{{ profile['last_name'] }}">
+        
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" value="{{ profile['dob'] }}">
+        
+            <div>
+              <label for="photo">Photo</label>
+              <input type="file" id="photo" name="photo" value="{{ url_for('static', filename=photopath ) }}"  accept="image/*" }}>
+            </div>
 
-    <label for="genderPref">Gender Preferences:</label>
-    <select name="genderPref" id="genderPref">
-      <option value="C">Co-Ed</option>
-      <option value="M">Males Only</option>
-      <option value="F">Females Only</option>
-      <option value="I">Independent</option>
-    </select>
+            <label for="occupation">Occupation</label>
+            <input name="occupation" id="occupation" value="{{ profile['occupation'] }}">
 
-    <label for="minage">Minimum Age</label>
-    <input name="minage" type="number" id="minage" value="{{ profile['ageMin'] }}">
+            <div class = "form-group">
+              <label for="description">Description</label>
+              <textarea name="description" id="description"  class ="form-control">{{ profile['description'] }}</textarea>
+            </div>
 
-    <label for="minage">Maximum Age</label>
-    <input name="maxage" type="number" id="maxage" value="{{ profile['ageMax'] }}">
+            <div class = "input-box">
+              <label for="gender">Gender:</label>
+              <select name="gender" id="gender">
+                <option value="O">Other</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+              </select>
+            </div>
 
-    <label for="minprice">Minimum Price</label>
-    <input name="minprice" type="number" id="minprice" value="{{ profile['priceMin'] }}">
+            <div class = "input-box">
+              <label for="genderPref">Gender Preferences:</label>
+              <select name="genderPref" id="genderPref">
+                <option value="C">Co-Ed</option>
+                <option value="M">Males Only</option>
+                <option value="F">Females Only</option>
+                <option value="I">Independent</option>
+              </select>
+            </div>
+        
+            <label for="minage">Minimum Age</label>
+            <input name="minage" type="number" id="minage" value="{{ profile['ageMin'] }}">
+        
+            <label for="minage">Maximum Age</label>
+            <input name="maxage" type="number" id="maxage" value="{{ profile['ageMax'] }}">
+        
+            <label for="minprice">Minimum Price</label>
+            <input name="minprice" type="number" id="minprice" value="{{ profile['priceMin'] }}">
+        
+            <label for="maxprice">Maximum Price</label>
+            <input name="maxprice" type="number" id="maxprice" value="{{ profile['priceMax'] }}">
+            
+            <label for="city">City</label>
+            <input name="city" id="city" value="{{ profile['city'] }}">
+        
+            <div class = "input-box">
+              <label for="state">State</label>
+              <select name="state" id="state">
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AR">AR</option>	
+                <option value="AZ">AZ</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DC">DC</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="IA">IA</option>	
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="MA">MA</option>
+                <option value="MD">MD</option>
+                <option value="ME">ME</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MO">MO</option>	
+                <option value="MS">MS</option>
+                <option value="MT">MT</option>
+                <option value="NC">NC</option>	
+                <option value="NE">NE</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>			
+                <option value="NV">NV</option>
+                <option value="NY">NY</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WI">WI</option>	
+                <option value="WV">WV</option>
+                <option value="WY">WY</option>
+              </select>
+            </div>
+              
+            <label for="zipcode">Zipcode</label>
+            <input name="zipcode" type="number" id="zipcode" value="{{ profile['zipcode'] }}">
+        
+            <div class = "input-box">
+              <label for="pets">Pets:</label>
+              <select name="pets" id="pets">
+                <option value="Y">Yes</option>
+                <option value="N">No</option>
+              </select>
+            </div>
 
-    <label for="maxprice">Maximum Price</label>
-    <input name="maxprice" type="number" id="maxprice" value="{{ profile['priceMax'] }}">
-    
-    <label for="city">City</label>
-    <input name="city" id="city" value="{{ profile['city'] }}">
-
-    <label for="state">State</label>
-    <select name="state" id="state">
-      <option value="AL">AL</option>
-      <option value="AK">AK</option>
-      <option value="AR">AR</option>	
-      <option value="AZ">AZ</option>
-      <option value="CA">CA</option>
-      <option value="CO">CO</option>
-      <option value="CT">CT</option>
-      <option value="DC">DC</option>
-      <option value="DE">DE</option>
-      <option value="FL">FL</option>
-      <option value="GA">GA</option>
-      <option value="HI">HI</option>
-      <option value="IA">IA</option>	
-      <option value="ID">ID</option>
-      <option value="IL">IL</option>
-      <option value="IN">IN</option>
-      <option value="KS">KS</option>
-      <option value="KY">KY</option>
-      <option value="LA">LA</option>
-      <option value="MA">MA</option>
-      <option value="MD">MD</option>
-      <option value="ME">ME</option>
-      <option value="MI">MI</option>
-      <option value="MN">MN</option>
-      <option value="MO">MO</option>	
-      <option value="MS">MS</option>
-      <option value="MT">MT</option>
-      <option value="NC">NC</option>	
-      <option value="NE">NE</option>
-      <option value="NH">NH</option>
-      <option value="NJ">NJ</option>
-      <option value="NM">NM</option>			
-      <option value="NV">NV</option>
-      <option value="NY">NY</option>
-      <option value="ND">ND</option>
-      <option value="OH">OH</option>
-      <option value="OK">OK</option>
-      <option value="OR">OR</option>
-      <option value="PA">PA</option>
-      <option value="RI">RI</option>
-      <option value="SC">SC</option>
-      <option value="SD">SD</option>
-      <option value="TN">TN</option>
-      <option value="TX">TX</option>
-      <option value="UT">UT</option>
-      <option value="VT">VT</option>
-      <option value="VA">VA</option>
-      <option value="WA">WA</option>
-      <option value="WI">WI</option>	
-      <option value="WV">WV</option>
-      <option value="WY">WY</option>
-    </select>
-      
-    <label for="zipcode">Zipcode</label>
-    <input name="zipcode" type="number" id="zipcode" value="{{ profile['zipcode'] }}">
-
-    <label for="pets">Pets:</label>
-    <select name="pets" id="pets">
-      <option value="Y">Yes</option>
-      <option value="N">No</option>
-    </select>
-
-    <label for="looking">Looking for: </label>
-    <select name="looking" id="looking">
-      <option value="B">Roommates and Housing</option>
-      <option value="H">Housing Only</option>
-      <option value="R">Roommates Only</option>
-    </select>
- 
-
-
-    <input type="submit" value="Change Profile">
-  </form>
-
+            <div class = "input-box">
+              <label for="looking">Looking for: </label>
+              <select name="looking" id="looking">
+                <option value="B">Roommates and Housing</option>
+                <option value="H">Housing Only</option>
+                <option value="R">Roommates Only</option>
+              </select>
+            </div>
+        
+        
+            <input type="submit" value="Change Profile">
+        </form>
+      </div>
+    </div>
+  </div>
 {% endblock %}

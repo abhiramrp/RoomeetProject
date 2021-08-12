@@ -1,10 +1,5 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Completing Registration{% endblock %}</h1>
-{% endblock %}
-
-<br>
 
 {% block content %}
 
@@ -12,6 +7,8 @@
     <div class="container">
       <div class= "user-details">
         <form method="post" enctype = "multipart/form-data">
+
+          <h1>Completing Registration</h1>  
           
           <div class = "input-box">
             <label for="fname" class="details">First Name</label>
@@ -28,8 +25,8 @@
             <input name="lname" id="lname" required>
           </div>
 
-          <div >
-            <label for="photo" class = "details">Photo</label>
+          <div>
+            <label for="photo">Photo</label>
             <input type="file" id="photo" name="photo" accept="image/*" required>
           </div>
 
