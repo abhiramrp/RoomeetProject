@@ -37,15 +37,10 @@ body {
     text-align: center;
     font-size: 100%;
 }
-{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    
-}
+
 .boxed{
     display: flex;
-    
+ 
     justify-content: center;
     align-items: center; 
 }
@@ -65,7 +60,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 20px 0 20px 0;
+    /* margin: 20px 0 20px 0; */
 }
 form .user-details .input-box{
     margin-bottom: 15px;
@@ -85,42 +80,4 @@ form .user-details .input-box{
    font-size: 16px;
    border-bottom-width: 2px;
    transition: all 0.3s ease;
-}
-.user-details .input-box input:focus,
-.user-details .input-box input:valid{
-    border-color:#f84646;
-}
-form .gender-details .gender-title{
-    font-size: 20px;
-    font-weight: 500;
-}
-form .gender-details .category{
-    display: flex;
-    width: 80%;
-    margin: 14px 0;
-    justify-content: space-between;
-}
-.gender-details .category label{
-    display: flex;
-    align-items: center;
-}
-.gender-details .category .dot{
-    height: 18px;
-    width: 18px;
-    background: #d9d9d9;
-    border-radius: 50%;
-    margin-right: 10px;
-    border: 5px solid transparent;
-    transition: all 0.3s ease;
-}
-
-#dot-1:checked ~ .category label .one,
-#dot-2:checked ~ .category label .two,
-#dot-3:checked ~ .category label .three{
-    border-color:#f84646;
-    background: #19dfc5;
-}
-
-form input[type="radio"]{
-    display: none;
 }
