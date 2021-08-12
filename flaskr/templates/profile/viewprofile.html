@@ -7,7 +7,7 @@
         <div class= "user-details">
             <h1>{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}</h1>
             <br>
-            <image src="{{ url_for('static', filename=photopath ) }}" ></image>
+            <img src="{{ url_for('static', filename=photopath ) }}" ><img>
             <br>
             <h2>Occupation:</h2>{{ profile['occupation']}}
             <h3>Age:</h3> {{ age }} 

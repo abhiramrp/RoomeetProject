@@ -6,7 +6,7 @@
 <br>
 {{housing['street'] }}
 <br>
-<image src="{{ url_for('static', filename=photopath ) }}" ></image>
+<img src="{{ url_for('static', filename=photopath ) }}" ></img>
 <br>
 
 {% if g.user['id'] == housing['poster_id'] %}

@@ -39,8 +39,8 @@ body {
 }
 
 .boxed{
+    margin-top: 50px;
     display: flex;
- 
     justify-content: center;
     align-items: center; 
 }
@@ -80,4 +80,9 @@ form .user-details .input-box{
    font-size: 16px;
    border-bottom-width: 2px;
    transition: all 0.3s ease;
+}
+img {
+    width:  600px;
+    height: 500px;
+    object-fit: cover;
 }
