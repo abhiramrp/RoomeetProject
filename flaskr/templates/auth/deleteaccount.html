@@ -1,19 +1,22 @@
+  
 {% extends 'base.html' %}
-
-{% block header %}
-  <h1>{% block title %}Delete Account{% endblock %}</h1>
-{% endblock %}
-
 {% block content %}
-<h1>Register</h1>
-
   <form method="post">
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <label for="cpassword">Confirm Password</label>
-    <input type="password" name="cpassword" id="cpassword" required>
-    By pressing "Delete Account", your account and related data will be deleted. 
-    <input type="submit" value="Delete Account">
+    <div class="boxed">
+      <div class="container">
+        <div class= "user-details">
+          <div class = "input-box">
+            <h1>Deleting Account</h1>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+            <label for="cpassword">Confirm Password</label>
+            <input type="password" name="cpassword" id="cpassword" required>
+            By pressing "Delete Account", your account and related data will be deleted. 
+          </div>
+          <input type="submit" value="Delete Account">
+        <div>
+      <div>
+    </div>
   </form>
-
 {% endblock %}
+© 2021 GitHub, Inc.
