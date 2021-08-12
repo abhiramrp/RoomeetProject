@@ -24,7 +24,7 @@ app.config["PROFILE_UPLOADS"] = "/Users/abhiram/Documents/GitHub/RoomeetProject/
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config["ALLOWED_EXTENSIONS"] = ALLOWED_EXTENSIONS
 
-profilelist = []
+
 
 
 def get_age(bdate):
@@ -56,6 +56,28 @@ def get_profile(id):
 
     return profile
 
+def get_user(id):
+
+    user = get_db().execute(
+        'SELECT * FROM user WHERE id = ?', (id,)
+    ).fetchone()
+
+    if user is None:
+        abort(404, f"User doesn't exist.")
+
+    return user
+
+def get_housing(id):
+
+    housing = get_db().execute(
+        'SELECT * FROM housing WHERE housing_id = ?', (id,)
+    ).fetchone()
+
+    if housing is None:
+        abort(404, f"Housing doesn't exist.")
+
+    return housing
+
 
 
 
@@ -67,9 +89,12 @@ def get_profile_ids():
         'SELECT user_id FROM profile'
     ).fetchall()
 
+    profilelist = []
+
     for profile in p:
         for i in profile:
             profilelist.append(i)
+
 
     profilelist.remove(user_id)
 
@@ -83,9 +108,36 @@ def get_profile_ids():
                 profilelist.remove(i)
     
 
-    print(profilelist)
-
     return profilelist
+
+
+
+def get_housing_ids():
+
+    user_id = session.get('user_id')
+
+    h = get_db().execute(
+        'SELECT housing_id FROM housing WHERE poster_id != ?', (user_id,)
+    ).fetchall()
+
+    houselist = []
+
+    for house in h:
+        for i in house:
+            houselist.append(i)
+
+    print(houselist)
+
+    hm = get_db().execute(
+        'SELECT house_id FROM housepairing WHERE user_id = ?', (user_id,)
+    ).fetchall()
+
+    for hmatch in hm:
+        for i in hmatch:
+            if i in houselist:
+                houselist.remove(i)
+
+    return houselist
 
 
 @bp.route('/match/<int:id>/<int:liketype>')
@@ -97,37 +149,17 @@ def matchlike(id, liketype):
     if liketype == 1: 
         user_id = session.get('user_id')
 
-        print(id, type(id))
 
         db.execute('INSERT INTO matchpairing (user_id, match_id) VALUES (?,?)', (user_id, id))
         db.commit()
 
-    print("Going to matchnext")
+
 
     profilelist = get_profile_ids()
 
-    print(profilelist)
+    if (len(profilelist)==0):
+        return render_template('roommeet/error.html', message="Out of profiles")
 
-    idloc = profilelist.index(id) + 1
-
-    print(profilelist)
-
-    if (idloc >= len(profilelist)):
-        idloc = 0
-
-    rp = get_profile(profilelist[idloc])
-
-    photopath = 'images/profiles/'+rp['photo']
-    age = get_age(rp['dob'])
-
-    return render_template('algorithm/profile.html', profile=rp, photopath=photopath, age=age)
-
-
-@bp.route('/match/')
-def matchrandom():
-    profilelist = get_profile_ids()
-
-    print(profilelist)
 
     id = random.choice(profilelist)
 
@@ -137,6 +169,75 @@ def matchrandom():
     age = get_age(rp['dob'])
 
     return render_template('algorithm/profile.html', profile=rp, photopath=photopath, age=age)
+
+
+
+@bp.route('/hmatch/<int:id>/<int:liketype>')
+@login_required
+def houselike(id, liketype):
+    db = get_db()
+
+
+    if liketype == 1: 
+        user_id = session.get('user_id')
+
+
+        db.execute('INSERT INTO housepairing (user_id, house_id) VALUES (?,?)', (user_id, id))
+        db.commit()
+
+
+    houselist = get_housing_ids()
+
+    if (len(houselist)==0):
+        return render_template('roommeet/error.html', message="Out of houses")
+
+
+    id = random.choice(houselist)
+
+    rh = get_housing(id)
+
+    photopath = 'images/houses/'+rh['photo']
+
+    return render_template('algorithm/house.html', housing=rh, photopath=photopath)
+
+
+@bp.route('/houseselectors/<int:id>')
+def houseselectors(id):
+    hm = get_db().execute(
+        'SELECT user_id FROM housepairing WHERE house_id = ?', (id,)
+    ).fetchall()
+
+    profilelist = []
+
+    housing = get_housing(id)
+
+    for person in hm:
+        for i in person:
+            p = get_profile(i)
+            profilelist.append(p)
+
+    return render_template('algorithm/viewselectors.html', housing=housing, plist = profilelist)
+
+
+
+@bp.route('/houseselections')
+def houseselections():
+    user_id = session.get('user_id')
+
+
+    dh = get_db().execute(
+        'SELECT house_id FROM housepairing WHERE user_id = ?', (user_id,)
+    ).fetchall()
+
+    houses = []
+
+    for house in dh:
+        for i in house:
+            h = get_housing(i)
+            houses.append(h)
+    
+
+    return render_template('algorithm/houseselections.html', hlist = houses)
 
 
 
@@ -190,6 +291,23 @@ def matches():
 
 
     return render_template('algorithm/viewmatches.html', mlist = profiles)
+
+@bp.route('/matchprofile', defaults={'profid': None})
+@bp.route('/matchprofile/<int:profid>')
+@login_required
+def match_profile(profid):
+    profile = get_profile(profid)
+
+    age = get_age(profile['dob'])
+
+    photopath = 'images/profiles/'+profile['photo']
+
+    u = get_user(profid)
+
+    phone = u['phone']
+
+    return render_template('algorithm/selectmatch.html', profile=profile, photopath=photopath, phone=phone, age=age)
+
 
 
 

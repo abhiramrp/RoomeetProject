@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<br>
+<image src="{{ url_for('static', filename=photopath ) }}" ></image>
+<br>
+
+{{ housing['street'] }} {{ housing['city'] }} {{ housing['zipcode'] }}
+{{ housing['rent'] }}
+
+
+<a href="{{ url_for('algorithm.houselike', id=(housing['housing_id']), liketype=0 ) }}">Ignore</a>
+
+<a href="{{ url_for('algorithm.houselike', id=(housing['housing_id']), liketype=1) }}">Like</a>
+
+{% endblock %}

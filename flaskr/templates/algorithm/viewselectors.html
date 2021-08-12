@@ -3,13 +3,10 @@
 
 {% block content %}
 
-<h1>Your Matches
-</h1>
-
-{% for m in mlist %}
+<h1>{{housing['street']}} Selectors</h1>
+{% for m in plist %}
 
 <a href="{{ url_for('algorithm.match_profile', profid=(m['user_id'])) }}">{{ m['first_name'] }} {{ m['middle_name'] }} {{ m['last_name'] }}</a>
-
 <br>
 
 
