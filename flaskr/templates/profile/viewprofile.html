@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="boxed">
+    <!--
     <div class="container">
             <div class= "user-details">
                     <h1 class ="text-center">{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}</h1>
@@ -17,6 +18,77 @@
             </div>
 
     </div>
+    -->
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                    
+                <img alt="Avatar" src="{{ url_for('static', filename=photopath ) }}" ></img>
+            </div>
+            <div class="flip-card-back">
+                <p>
+                    <h1>{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}</h1>
+                    <h2>Occupation: {{ profile['occupation']}} </h2> 
+                    <h3>Age: {{ age }} </h3>
+                    <p>Age Range:  {{profile['ageMin']}} - {{profile['ageMax']}}</p>
+
+                    {{ profile['city'] }}, {{ profile['state'] }} {{ profile['zipcode'] }}
+
+                    <br>
+
+                    {% if profile['description'] != "" %}
+                    <h4>Description</h4>
+                    {{profile['description']}}
+                    {% endif %}
+
+                    <br>
+
+                    <h4>Rent Range</h4>
+                    $ {{profile['priceMin']}} - {{profile['priceMax']}}
+
+                    <br>
+
+                    {% if profile['genderPref'] == 'C' %}
+                        Co-ed roommates
+                    {% elif profile['genderPref'] == 'M' %}
+                        Prefers male roommates
+                    {% elif profile['looking'] == 'F' %}
+                        Prefers female roommates
+                    {% elif profile['looking'] == 'I' %}
+                        Prefers to live independent
+                    {% endif %}
+
+                    {% if profile['pets'] == 'Y' %}
+                        Cool with pets!
+                    {% else %}
+                        No Pets!
+                    {% endif %}
+
+                    <br>
+
+                    <!--
+                    {% if profile['looking'] == 'B' %}
+                        Looking for roommates and housing
+                    {% elif profile['looking'] == 'H' %}
+                        Looking for housing only
+                    {% elif profile['looking'] == 'R' %}
+                        Looking for roommates only
+                    {% endif %}
+                    -->
+
+
+
+
+
+
+                </p>
+            </div>
+        </div>
+        {% if g.user['id'] == profile['user_id'] %}
+        <a class="nav-link btn btn-info mx-auto text-white" href="{{ url_for('roommeet.change_profile') }}">Change Profile</a>
+    {% endif %}
+    </div>
+
 </div>
 
 

@@ -49,7 +49,7 @@
                     {% endif %}
 
                     <br>
-                    
+
                     {% if profile['looking'] == 'B' %}
                         Looking for roommates and housing
                     {% elif profile['looking'] == 'H' %}
@@ -71,8 +71,8 @@
 </div>
 
 <div class = "ignore-like">
-    <a class="btn btn-info" href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=0 ) }}">Ignore</a>
-    <a class="btn btn-info" href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=1) }}">Like</a>
+    <a class="btn btn-info" href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=0 ) }}">&#10060	</a>
+    <a class="btn btn-info" href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=1) }}">&#128151</a>
 </div>
 
 
