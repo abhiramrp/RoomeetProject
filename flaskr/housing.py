@@ -16,7 +16,7 @@ bp = Blueprint('housing', __name__)
 
 app = create_app()
 
-app.config["HOUSING_UPLOADS"] = "/Users/abhiram/Documents/GitHub/RoomeetProject/flaskr/static/images/houses"
+app.config["HOUSING_UPLOADS"] = "flaskr\static\images\houses"
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config["ALLOWED_EXTENSIONS"] = ALLOWED_EXTENSIONS
 
