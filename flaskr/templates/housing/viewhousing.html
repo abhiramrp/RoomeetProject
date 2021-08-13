@@ -2,17 +2,22 @@
 
 
 {% block content %}
-<a href="{{ url_for('algorithm.match_profile', profid=(housing['poster_id'])) }}">View Post Owner</a>
-<br>
-{{housing['street'] }}
-<br>
-<img src="{{ url_for('static', filename=photopath ) }}" ></img>
-<br>
+<div class="boxed">
+    <div class="container">
+        <div class= "user-details">
+            {{housing['street'] }}
+            <br>
+            <img src="{{ url_for('static', filename=photopath ) }}" ></img>
+            <br>
+             {% if g.user['id'] == housing['poster_id'] %}
+            <a class="nav-link btn btn-info mx-auto text-white" href="{{ url_for('algorithm.match_profile', profid=(housing['poster_id'])) }}">View Post Owner</a>
+            <a class="nav-link btn btn-info mx-auto text-white" href="{{ url_for('housing.change_housing', houseid=(housing['housing_id'])) }}">Change Housing</a>
+            <a class="nav-link btn btn-info mx-auto text-white" href="{{ url_for('algorithm.houseselectors', id=(housing['housing_id'])) }}">View Selectors</a>
+            {% endif %}
 
-{% if g.user['id'] == housing['poster_id'] %}
-<a href="{{ url_for('housing.change_housing', houseid=(housing['housing_id'])) }}">Change Housing</a>
-<a href="{{ url_for('algorithm.houseselectors', id=(housing['housing_id'])) }}">View Selectors</a>
-{% endif %}
+        </div>
 
+    </div>
+</div>
 
 {% endblock %}
