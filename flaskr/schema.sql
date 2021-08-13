@@ -94,9 +94,3 @@ CREATE TABLE housepairing (
   FOREIGN KEY (user_id) REFERENCES user (id),
   FOREIGN KEY (house_id) REFERENCES user (id)
 );
-
-
-
-
-
-

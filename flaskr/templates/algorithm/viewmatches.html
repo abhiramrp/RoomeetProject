@@ -17,7 +17,7 @@
     <div class="container">
         <div class= "user-details">
             
-            <a href="{{ url_for('roommeet.view_profile', profid=(m['user_id'])) }}">{{ m['first_name'] }} {{ m['middle_name'] }} {{ m['last_name'] }}</a>
+            <a href="{{ url_for('algorithm.match_profile', profid=(m['user_id'])) }}">{{ m['first_name'] }} {{ m['middle_name'] }} {{ m['last_name'] }}</a>
             {{ m['phone'] }}
             <br>            
         </div>
