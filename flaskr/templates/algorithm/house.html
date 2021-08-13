@@ -4,16 +4,43 @@
 {% block content %}
 
 
-<br>
-<img src="{{ url_for('static', filename=photopath ) }}" ></img>
-<br>
+<div class ="boxed">
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                    
 
-{{ housing['street'] }} {{ housing['city'] }} {{ housing['zipcode'] }}
-{{ housing['rent'] }}
+                <img alt="Avatar" src="{{ url_for('static', filename=photopath ) }}" ></img>
+            </div>
+            <div class="flip-card-back">
+                <p>
+                    <h1>Address</h1>
+                    {{ housing['street'] }}, {{ housing['city'] }}, {{ housing['zipcode'] }}
+
+                    <h2>Rent</h2>
+                    ${{ housing['rent'] }}
+
+                    <h3>Age Range</h3>
+                    {{ housing['ageMin']}} - {{ housing['ageMax']}}
+
+                    <h4>Description</h4>
+                    {{ housing['description']}}
 
 
-<a href="{{ url_for('algorithm.houselike', id=(housing['housing_id']), liketype=0 ) }}">Ignore</a>
+                </p>
+            </div>
+        </div>
+    </div>
 
-<a href="{{ url_for('algorithm.houselike', id=(housing['housing_id']), liketype=1) }}">Like</a>
+    
+    
+</div>
+
+<div class = "ignore-like">
+    <a class="btn btn-info" href="{{ url_for('algorithm.houselike', id=(housing['housing_id']), liketype=0 ) }}">Ignore</a>
+    <a class="btn btn-info" href="{{ url_for('algorithm.houselike', id=(housing['housing_id']), liketype=1) }}">Like</a>
+</div>
+
+
 
 {% endblock %}
