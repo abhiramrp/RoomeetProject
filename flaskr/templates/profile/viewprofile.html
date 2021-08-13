@@ -4,15 +4,15 @@
 {% block content %}
 <div class="boxed">
     <div class="container">
-        <div class= "user-details">
-            <h1>{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}</h1>
-            <br>
-            <img src="{{ url_for('static', filename=photopath ) }}" ><img>
-            <br>
-            <h2>Occupation:</h2>{{ profile['occupation']}}
-            <h3>Age:</h3> {{ age }} 
-        </div>
-        <a class="nav-link" href="{{ url_for('roommeet.change_profile') }}">Change Profile</a>
+            <div class= "user-details">
+                    <h1 class ="text-center">{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}</h1>
+                    <br>
+                        <img src="{{ url_for('static', filename=photopath ) }}" ></img>
+                    <br>
+                    <h2 class ="text-center mt-3">Occupation: {{ profile['occupation']}}</h2>
+                    <h3 class ="text-center">Age: {{ age }} </h3> 
+                    <a class="nav-link btn btn-info mx-auto text-white" href="{{ url_for('roommeet.change_profile') }}">Change Profile</a>
+            </div>
     </div>
 </div>
 
