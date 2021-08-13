@@ -5,7 +5,7 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <h1><a  class="navbar-brand" href="{{ url_for('roommeet.index') }}">Roomeet</a></h1>
+  <a  class="navbar-brand mx-4" href="{{ url_for('roommeet.index') }}">Roomeet</a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       {% if g.user %}
@@ -17,11 +17,12 @@
         <li class="nav-item active"><a class="nav-link" href="{{ url_for('algorithm.selections') }}">Your Selections</a>
         <li class="nav-item active"><a class="nav-link" href="{{ url_for('algorithm.matches') }}">Your Matchings</a>
         {% endif %}
-        <li class="nav-item active"><a class="nav-link" href="{{ url_for('auth.change_account') }}">Account Settings</a>
-        <li class="nav-item active"><a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
+          <li class="nav-item active"><a class="nav-link" href="{{ url_for('auth.change_account') }}">Account Settings</a>
+          <li class="nav-item active"><a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
       {% else %}
         <li class="nav-item active"><a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
         <li class="nav-item active"><a class="nav-link" href="{{ url_for('auth.login') }}">Log In</a>
+
       {% endif %}
     </ul>
   </div>
