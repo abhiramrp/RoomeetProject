@@ -3,16 +3,23 @@
 
 {% block content %}
 
-{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}
-<br>
-<img src="{{ url_for('static', filename=photopath ) }}" ></img>
-<br>
-{{ profile['occupation']}}
-
-{{ age }}
-
-<br>
 
 Phone: {{ phone }}
+<div class="boxed">
+    <div class="container">
+            <div class= "user-details">
+                    <h1 class ="text-center">{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}</h1>
+                    <br>
+                        <img src="{{ url_for('static', filename=photopath ) }}" ></img>
+                    <br>
+                    <h2 class ="text-center mt-3">Occupation: {{ profile['occupation']}}</h2>
+                    <h3 class ="text-center">Age: {{ age }} </h3> 
+                    {% if g.user['id'] == profile['user_id'] %}
+                    <a class="nav-link btn btn-info mx-auto text-white" href="{{ url_for('roommeet.change_profile') }}">Change Profile</a>
+                    {% endif %}
+            </div>
+
+    </div>
+</div>
 
 {% endblock %}
