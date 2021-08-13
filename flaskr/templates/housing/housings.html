@@ -3,16 +3,43 @@
 
 {% block content %}
 
-<h1>Your housings</h1>
+<div class="boxed">
+    <div class="container">
+        <div class= "user-details">
+            <h1>Your housings</h1>
+        </div>
+    </div>
+</div>
+
+
 
 {% for h in hlist %}
-<a href="{{ url_for('housing.view_housing', houseid=(h)) }}">Housing {{h}} </a>
-<br>
+<div class="boxed">
+    <div class="container">
+        <div class= "user-details">
+            
+            <a href="{{ url_for('housing.view_housing', houseid=(h)) }}">Housing {{h}} </a>
+            <br>
+
+        </div>
+    </div>
+</div>
+
 
 
 {% endfor %}
 
 
-<a href="{{ url_for('housing.create_housing') }}">Create Housing Listing</a>
+<div class="boxed">
+    <div class="container">
+        <div class= "user-details">
+            
+            <a href="{{ url_for('housing.create_housing') }}">Create Housing Listing</a>
+
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock %}

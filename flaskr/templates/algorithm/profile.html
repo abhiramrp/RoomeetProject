@@ -2,24 +2,6 @@
 
 
 {% block content %}
-<!-- <div class="boxed">
-    <div class="container">
-        <div class= "user-details">
-            <h1>{{ profile['first_name'] }} {{ profile['middle_name'] }} {{ profile['last_name'] }}</h1>
-            <br>
-            <img src="{{ url_for('static', filename=photopath ) }}" ></img>
-            <br>
-            <h2>Occupation:</h2>{{ profile['occupation']}}
-            <h3>Age:</h3> {{ age }} 
-
-            <a href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=0 ) }}">Ignore</a>
-
-            <a href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=1) }}">Like</a>
-        </div>
-    </div>
-</div> -->
-
-
 <div class ="boxed">
     <div class="flip-card">
         <div class="flip-card-inner">
@@ -36,10 +18,6 @@
                     <h4>Description</h4>
                     {{profile['description']}}
                 </p>
-                
-
-                
-
             </div>
         </div>
     </div>
