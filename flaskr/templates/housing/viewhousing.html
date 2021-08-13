@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="boxed">
+    <!--
     <div class="container">
         <div class= "user-details">
             {{housing['street'] }}
@@ -17,6 +18,60 @@
 
         </div>
 
+    </div>
+    -->
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img alt="Avatar" src="{{ url_for('static', filename=photopath ) }}" ></img>
+            </div>
+            <div class="flip-card-back">
+                <p>
+                    <h1>Address</h1>
+                    {{ housing['street'] }}, {{ housing['city'] }}, {{ housing['zipcode'] }}
+
+                    <h2>Rent: ${{ housing['rent'] }}</h2>
+
+                    <h3>Age Range</h3>
+                    {{ housing['ageMin']}} - {{ housing['ageMax']}}
+
+                    <h4>Description</h4>
+                    {{ housing['description']}}
+
+                    <br>
+
+
+                    {% if housing['pets'] == 'Y' %}
+                        Cool with pets!
+                    {% else %}
+                        No Pets!
+                    {% endif %}
+
+                    <br>
+
+                    {% if housing['genderPref'] == 'C' %}
+                        Co-ed roommates
+                    {% elif housing['genderPref'] == 'M' %}
+                        Prefers male roommates
+                    {% elif housing['looking'] == 'F' %}
+                        Prefers female roommates
+                    {% elif housing['looking'] == 'I' %}
+                        Have independent rooms
+                    {% endif %}
+
+                </p>
+
+
+                {% if g.user['id'] == housing['poster_id'] %}
+                    <a class="nav-link btn btn-info mx-auto text-white" href="{{ url_for('housing.change_housing', houseid=(housing['housing_id'])) }}">Change Housing</a>
+                    <a class="nav-link btn btn-info mx-auto text-white" href="{{ url_for('algorithm.houseselectors', id=(housing['housing_id'])) }}">View Selectors</a>
+                {% else %}
+                    <a class="nav-link btn btn-info mx-auto text-white" href="{{ url_for('algorithm.match_profile', profid=(housing['poster_id'])) }}">View Post Owner</a>
+                {% endif %}
+            </div>
+        </div>
+
+    
     </div>
 </div>
 

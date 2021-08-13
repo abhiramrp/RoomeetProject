@@ -8,8 +8,6 @@
     <div class="flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                    
-
                 <img alt="Avatar" src="{{ url_for('static', filename=photopath ) }}" ></img>
             </div>
             <div class="flip-card-back">
@@ -17,8 +15,7 @@
                     <h1>Address</h1>
                     {{ housing['street'] }}, {{ housing['city'] }}, {{ housing['zipcode'] }}
 
-                    <h2>Rent</h2>
-                    ${{ housing['rent'] }}
+                    <h2>Rent: ${{ housing['rent'] }}</h2>
 
                     <h3>Age Range</h3>
                     {{ housing['ageMin']}} - {{ housing['ageMax']}}
@@ -26,10 +23,34 @@
                     <h4>Description</h4>
                     {{ housing['description']}}
 
+                    <br>
+
+
+                    {% if housing['pets'] == 'Y' %}
+                        Cool with pets!
+                    {% else %}
+                        No Pets!
+                    {% endif %}
+
+                    <br>
+
+                    {% if housing['genderPref'] == 'C' %}
+                        Co-ed roommates
+                    {% elif housing['genderPref'] == 'M' %}
+                        Prefers male roommates
+                    {% elif housing['looking'] == 'F' %}
+                        Prefers female roommates
+                    {% elif housing['looking'] == 'I' %}
+                        Have independent rooms
+                    {% endif %}
 
                 </p>
+
+                <a class="nav-link btn btn-info mx-auto text-white" href="{{ url_for('algorithm.match_profile', profid=(housing['poster_id'])) }}">View Post Owner</a>
             </div>
         </div>
+
+    
     </div>
 
     
@@ -37,8 +58,8 @@
 </div>
 
 <div class = "ignore-like">
-    <a class="btn btn-info" href="{{ url_for('algorithm.houselike', id=(housing['housing_id']), liketype=0 ) }}">Ignore</a>
-    <a class="btn btn-info" href="{{ url_for('algorithm.houselike', id=(housing['housing_id']), liketype=1) }}">Like</a>
+    <a class="btn btn-info" href="{{ url_for('algorithm.houselike', id=(housing['housing_id']), liketype=0 ) }}">&#10060</a>
+    <a class="btn btn-info" href="{{ url_for('algorithm.houselike', id=(housing['housing_id']), liketype=1) }}">&#128151</a>
 </div>
 
 
