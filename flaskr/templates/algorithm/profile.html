@@ -9,9 +9,8 @@
             <br>
             <img src="{{ url_for('static', filename=photopath ) }}" ></img>
             <br>
-            {{ profile['occupation']}}
-
-            {{ age }}
+            <h2>Occupation:</h2>{{ profile['occupation']}}
+            <h3>Age:</h3> {{ age }} 
 
             <a href="{{ url_for('algorithm.matchlike', id=(profile['user_id']), liketype=0 ) }}">Ignore</a>
 
