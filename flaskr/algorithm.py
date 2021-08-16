@@ -20,7 +20,7 @@ bp = Blueprint('algorithm', __name__)
 
 app = create_app()
 
-app.config["PROFILE_UPLOADS"] = "/Users/abhiram/Documents/GitHub/RoomeetProject/flaskr/static/images/profiles"
+app.config["PROFILE_UPLOADS"] = "flaskr/static/images/profiles"
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config["ALLOWED_EXTENSIONS"] = ALLOWED_EXTENSIONS
 
